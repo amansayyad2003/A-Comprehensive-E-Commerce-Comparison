@@ -29,4 +29,5 @@
 	- Then we will show the near by shop details like price etc
 
 TODO:
-SRS - Software requirement Specifications
+SRS - Software requirement Specifications - next week
+Think of something new algorithm or idea which we can implement rather than only fetching the data and displaying it
