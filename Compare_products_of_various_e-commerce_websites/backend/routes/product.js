@@ -94,4 +94,81 @@ router.post('/deleteproduct/:id',fetchUserID,async(req,res)=>{
     }
 })
 
+
+
+
+
+
+// GET product details USING GET /product/getproduct
+
+
+router.get('/getproduct/:id',fetchUserID,async(req,res)=>{
+
+    let success = false;
+
+    try{
+
+        let product = await Product_model.findById(req.params.id)
+
+        if (!product){
+            return res.status(400).json({ success,error: "This product does not exist"});
+        }
+
+        if (req.user.id!==product.user.toString()){
+            return res.status(400).json({success,error:"You are Not Allowed to view this product"})
+        }
+
+
+        success = true;
+
+        res.json({success,product})
+
+
+
+    }catch(error){
+        return res.status(400).json({ success,error: error.message});
+    }
+})
+
+
+
+// UPDATE product details USING PUT /product/updateproduct
+
+
+router.put('/updateproduct/:id',fetchUserID,async(req,res)=>{
+
+    let success = false;
+
+    try{
+
+        let product = await Product_model.findById(req.params.id)
+
+        if (!product){
+            return res.status(400).json({ success,error: "This product does not exist"});
+        }
+
+        if (req.user.id!==product.user.toString()){
+            return res.status(400).json({success,error:"You are Not Allowed to edit this product"})
+        }
+
+        let newProduct = {}
+
+        if (req.body.title) newProduct.title = req.body.title
+        if (req.body.description) newProduct.description = req.body.description
+        
+
+        let edited_product = await Product_model.findByIdAndUpdate(req.params.id,{$set:newProduct},{new:true}) // $set is used to access the new product details and new:true means that if any new field is added in the product it will be considered
+
+        success = true;
+
+        res.json({success,edited_product})
+
+
+
+    }catch(error){
+        return res.status(400).json({ success,error: error.message});
+    }
+})
+
+
 module.exports = router
