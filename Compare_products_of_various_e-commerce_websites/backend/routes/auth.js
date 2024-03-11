@@ -3,6 +3,9 @@ const router = express.Router()
 const { body, validationResult } = require('express-validator'); // using express-validator version 6.12.0!
 const User_model = require('../models/User')
 let bcrypt = require('bcryptjs');
+const fetchUserID = require('../middleware/fetchUserID');
+const JWT_SECRET = "This is a secret"
+let jwt = require('jsonwebtoken');
 // json tokeb
 
 // CREATE USER USING POST /auth/createuser
@@ -43,9 +46,18 @@ router.post('/createuser',[
 
 
       success = true;
+
+      const data = { // sending user's id in data
+
+        user:{
+            id:user.id
+        }
+      }
+
+      const authtoken = jwt.sign(data, JWT_SECRET); // sign user's id with secret string
    
 
-      res.json({success,user})
+      res.json({success,authtoken})
 
 
     }catch(error){
@@ -95,7 +107,20 @@ router.post('/loginuser',[
 
     success = true;
 
-    res.json({success,message:"Logged In Successfully"})
+    const data = { // sending user's id in data
+
+        user:{
+            id:user.id
+        }
+      }
+
+      const authtoken = jwt.sign(data, JWT_SECRET); // sign user's id with secret string
+   
+
+      res.json({success,authtoken})
+
+
+
 
 
 
@@ -110,5 +135,42 @@ router.post('/loginuser',[
     }
 
 })
+
+
+
+// GET A SPECIFIC USER'S DETAILS USING GET /auth/getuser
+
+
+router.get('/getuser',fetchUserID,async(req,res)=>{
+
+
+
+    let success = false;
+
+    try{
+
+      const userID = req.user.id // obtained using middlware fetchUserID
+
+      const user = await User_model.findById(userID).select("-password")
+
+      if (!user){
+        return res.status(400).json({ success,error: "This User does not exist"});
+      }
+
+
+
+    success = true;
+
+    res.json({success,user})
+
+
+
+    }catch(error){
+
+        return res.status(400).json({ success,error: error.message});
+    }
+
+})
+
 
 module.exports = router
