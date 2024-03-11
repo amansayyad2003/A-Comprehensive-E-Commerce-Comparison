@@ -4,17 +4,30 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
-import Display_Product from './components/Display_Product'
 import Productstate from '../context/products/Productstate'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Alert from './components/Alert'
 import {
   BrowserRouter as Router,
   Routes,
   Route,
 } from "react-router-dom";
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [alert,setAlert] = useState(null)
+
+  const showAlert = (message,type)=>{
+
+    console.log("Inside Show Alert")
+
+      setAlert({message,type})
+
+      setTimeout(()=>{
+
+        setAlert(null)
+      },1500)
+  }
 
   return (
     <>
@@ -24,11 +37,12 @@ function App() {
 
     <Navbar/>
 
+    <Alert alert={alert}/>
     <Routes>
        
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/signup" element={<Signup />}></Route>
+          <Route exact path="/" element={<Home alert={alert} showAlert={showAlert} />}></Route>
+          <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert} />}></Route>
+          <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert} />}></Route>
 
         </Routes>
 

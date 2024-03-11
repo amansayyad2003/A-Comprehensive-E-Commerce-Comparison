@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import productContext from '../../context/products/Productcontext'
 import { useNavigate } from "react-router-dom";
-export default function Login() {
+export default function Login(props) {
 
     let context = useContext(productContext)
 
@@ -37,13 +37,15 @@ export default function Login() {
 
   if (json.success){
 
+    props.showAlert("User Logged In Successfully","success")
     navigate("/");
+
 
   }
 
   else{
 
-    alert("Enter valid credentials")
+    props.showAlert("Enter Valid Login Credentials","danger")
   }
 
 
