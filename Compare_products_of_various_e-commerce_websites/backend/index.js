@@ -12,6 +12,7 @@ connectToMongo()
 app.use(express.json()) //  console.log(req.body) prints undefined if this middleware is not used
 
 app.use('/auth',require('./routes/auth'))
+app.use('/product',require('./routes/product'))
 
 app.listen(port, () => {
   console.log(`Compare Craft listening on port http://localhost:${port}`)

@@ -4,7 +4,7 @@ const { body, validationResult } = require('express-validator'); // using expres
 const User_model = require('../models/User')
 let bcrypt = require('bcryptjs');
 const fetchUserID = require('../middleware/fetchUserID');
-const JWT_SECRET = "This is a secret"
+const JWT_SECRET = "This is a secret" // JWT SECRET should not be hardcoded
 let jwt = require('jsonwebtoken');
 // json tokeb
 
