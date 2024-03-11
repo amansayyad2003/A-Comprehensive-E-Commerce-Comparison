@@ -6,6 +6,8 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Display_Product from './components/Display_Product'
 import Productstate from '../context/products/Productstate'
+import Login from './components/Login'
+import Signup from './components/Signup'
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,6 +27,8 @@ function App() {
     <Routes>
        
           <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<Signup />}></Route>
 
         </Routes>
 
