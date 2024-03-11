@@ -8,6 +8,7 @@ import Productstate from '../context/products/Productstate'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Alert from './components/Alert'
+import SearchBar from './components/SearchBar'
 import {
   BrowserRouter as Router,
   Routes,
@@ -36,6 +37,8 @@ function App() {
     <Router>
 
     <Navbar/>
+
+    <SearchBar/>
 
     <Alert alert={alert}/>
     <Routes>

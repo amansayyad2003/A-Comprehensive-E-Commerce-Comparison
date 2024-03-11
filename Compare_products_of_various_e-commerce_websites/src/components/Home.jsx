@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <div className='container'>
 
-<h1 style={{ textAlign: 'center' }}>Displaying Products</h1>
+{/* <h1 style={{ textAlign: 'center',marginTop:'20px' }}>Displaying Products</h1> */}
 
 
-    <div className="row">
+    <div className="row" style={{marginTop:'20px' }}>
       {loading?<Spinner/>:products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
         return  <div className="col-md-4 my-2">
         <Display_Product title={product.title} description={product.description}/>

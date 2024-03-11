@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-
+import { Link
+} from "react-router-dom";
 export default function Display_Product(props) {
 
 
@@ -12,7 +13,8 @@ export default function Display_Product(props) {
   <div className="card-body">
     <h5 className="card-title">{props.title}</h5>
     <p className="card-text">{props.description}</p>
-    <a href="/TODO" className="btn btn-primary">Go to the Website of this product</a>
+    <p><Link to="/TODO" className="btn btn-primary">Go to the Website of this product</Link></p>
+    <p><Link to="/TODO" className="btn btn-primary">Add to Cart</Link></p>
   </div>
 </div>
     </div>
