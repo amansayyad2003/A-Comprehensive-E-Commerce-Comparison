@@ -1,0 +1,108 @@
+[
+    {
+      "title": "Smartphone",
+      "price": 599.99,
+      "description": "A versatile handheld device with various features like calling, messaging, internet browsing, and app usage."
+    },
+    {
+      "title": "Laptop",
+      "price": 999.99,
+      "description": "A portable computer with a keyboard, display screen, and built-in battery, suitable for use on the go."
+    },
+    {
+      "title": "Smartwatch",
+      "price": 299.99,
+      "description": "A wearable device with a touchscreen display, capable of receiving notifications, tracking fitness, and running apps."
+    },
+    {
+      "title": "Tablet",
+      "price": 399.99,
+      "description": "A mobile device with a touchscreen display, larger than a smartphone but smaller than a laptop, ideal for browsing, reading, and multimedia consumption."
+    },
+    {
+      "title": "Wireless Earbuds",
+      "price": 149.99,
+      "description": "Small, lightweight earphones that connect wirelessly to a device, providing high-quality audio for music and calls."
+    },
+    {
+      "title": "Bluetooth Speaker",
+      "price": 79.99,
+      "description": "A portable speaker that connects wirelessly to devices via Bluetooth, allowing users to listen to music or podcasts on the go."
+    },
+    {
+      "title": "Fitness Tracker",
+      "price": 129.99,
+      "description": "A wearable device that tracks fitness-related metrics such as steps taken, distance traveled, calories burned, and heart rate."
+    },
+    {
+      "title": "Action Camera",
+      "price": 349.99,
+      "description": "A compact and rugged camera designed for capturing action-packed moments during outdoor activities like sports, biking, or hiking."
+    },
+    {
+      "title": "Virtual Reality Headset",
+      "price": 499.99,
+      "description": "A wearable device that immerses users in virtual reality environments, providing an immersive gaming, entertainment, or educational experience."
+    },
+    {
+      "title": "Smart Home Hub",
+      "price": 199.99,
+      "description": "A central device that connects and controls various smart home devices, allowing users to automate and manage their home's functions."
+    },
+    {
+      "title": "Gaming Console",
+      "price": 399.99,
+      "description": "A specialized computer system designed for playing video games, typically connected to a television or monitor and operated with a game controller."
+    },
+    {
+      "title": "Wireless Router",
+      "price": 129.99,
+      "description": "A device that connects multiple devices to a network and routes data packets between them wirelessly, providing internet access to connected devices."
+    },
+    {
+      "title": "Digital Camera",
+      "price": 599.99,
+      "description": "A standalone camera that captures still photographs or videos digitally, offering high-quality imaging capabilities for photography enthusiasts."
+    },
+    {
+      "title": "Portable Power Bank",
+      "price": 49.99,
+      "description": "A portable battery pack that provides backup power for charging electronic devices like smartphones, tablets, or portable speakers on the go."
+    },
+    {
+      "title": "E-book Reader",
+      "price": 149.99,
+      "description": "A portable device designed for reading digital books or e-books, featuring an electronic ink display that mimics the appearance of printed paper."
+    },
+    {
+      "title": "Smart Speaker",
+      "price": 129.99,
+      "description": "A speaker with built-in voice recognition technology, capable of playing music, answering questions, setting reminders, and controlling smart home devices."
+    },
+    {
+      "title": "Wireless Gaming Mouse",
+      "price": 79.99,
+      "description": "A computer mouse designed specifically for gaming, featuring wireless connectivity, customizable buttons, and high-precision optical sensors."
+    },
+    {
+      "title": "Wireless Keyboard",
+      "price": 69.99,
+      "description": "A keyboard that connects to a computer or mobile device wirelessly, providing users with flexibility and freedom of movement while typing."
+    },
+    {
+      "title": "Smart Thermostat",
+      "price": 199.99,
+      "description": "A programmable thermostat that connects to a home's heating and cooling system, allowing users to control temperature settings remotely via a smartphone app."
+    },
+    {
+      "title": "Drone",
+      "price": 799.99,
+      "description": "An unmanned aerial vehicle equipped with cameras or sensors, used for aerial photography, videography, surveillance, or recreational purposes."
+    },
+    {
+      "title": "Wireless Charging Pad",
+      "price": 39.99,
+      "description": "A flat surface that wirelessly charges compatible devices like smartphones, smartwatches, or wireless earbuds by transferring power through electromagnetic induction."
+    }
+  ]
+  

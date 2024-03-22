@@ -1,6 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
 import productContext from './Productcontext'
+import axios from "axios"
 export default function Productstate(props) {
+
+  const [products,setProducts] = useState([])
+
+ 
 
     const productInitial =  [
       {
@@ -25,7 +30,9 @@ export default function Productstate(props) {
       }
     ]
 
-    const [products,setProducts] = useState(productInitial)
+
+
+
 
   return (
     <div>

@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Alert from './components/Alert'
 import SearchBar from './components/SearchBar'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -40,10 +41,13 @@ function App() {
 
     <SearchBar/>
 
+    
+
     <Alert alert={alert}/>
     <Routes>
        
           <Route exact path="/" element={<Home alert={alert} showAlert={showAlert} />}></Route>
+
           <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert} />}></Route>
           <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert} />}></Route>
 
