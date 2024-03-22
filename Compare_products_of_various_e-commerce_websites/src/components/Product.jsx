@@ -34,21 +34,7 @@ export default function Product() {
     
       }
 
-      const nextClick = async() => {
-
-        
-        let url = `${API_URL}?page=${page+1}&pageSize=${pageSize}`
-        setPage(page+1)
-
-        const response = await axios.get(url);
-
- 
-
-        setProducts(response.data.mydata)
-
-
-
-      }
+     
     
 
     const updateProducts = async() => {
@@ -81,8 +67,6 @@ export default function Product() {
   return (
     <>
 
-{console.log(products)}
-<button type="button" class="btn btn-primary" onClick={nextClick}>Next Page</button>
 
 <InfiniteScroll
           dataLength={products.length}
