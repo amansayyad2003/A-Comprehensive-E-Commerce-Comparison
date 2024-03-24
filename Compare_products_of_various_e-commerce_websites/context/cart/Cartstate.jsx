@@ -16,7 +16,7 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVmZmE4NDc5NDYyODliNDQ5ZWU5MmM0In0sImlhdCI6MTcxMTI1MzU3NX0.bYnSEcaJkzFMX-lcENgpMfIzixfuoWdCqPwcTTYj9UQ"
+          "auth-token":localStorage.getItem("authtoken")
         },
         
       });
@@ -44,7 +44,7 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVmZmE4NDc5NDYyODliNDQ5ZWU5MmM0In0sImlhdCI6MTcxMTI1MzU3NX0.bYnSEcaJkzFMX-lcENgpMfIzixfuoWdCqPwcTTYj9UQ"
+          "auth-token":localStorage.getItem("authtoken")
         },
 
         body: JSON.stringify({title:product.title,description:product.description,image:product.image,price:product.price}),
@@ -76,7 +76,7 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVmZmE4NDc5NDYyODliNDQ5ZWU5MmM0In0sImlhdCI6MTcxMTI1MzU3NX0.bYnSEcaJkzFMX-lcENgpMfIzixfuoWdCqPwcTTYj9UQ"
+          "auth-token":localStorage.getItem("authtoken")
         },
         
       });

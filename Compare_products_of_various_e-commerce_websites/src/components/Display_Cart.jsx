@@ -11,7 +11,12 @@ export default function Display_Cart(props) {
 
     if (localStorage.getItem("authtoken"))  fetch_cart();
 
-    else navigate("/login")
+    else{
+
+      props.showAlert("You have to Login to View Your Cart!","danger")
+
+      navigate("/login")
+    }
 
    
   },[])

@@ -35,7 +35,7 @@ function Navbar() {
       
     </div>
 
-    {!localStorage.getItem('token')?      <form className="d-flex">
+    {!localStorage.getItem('authtoken')?      <form className="d-flex">
       <Link to="/login" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Login</Link>
       <Link to="/signup" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Sign Up</Link></form>
   :<button type="button" className="btn btn-primary mx-2" onClick={handleLogout}>Logout</button>}
