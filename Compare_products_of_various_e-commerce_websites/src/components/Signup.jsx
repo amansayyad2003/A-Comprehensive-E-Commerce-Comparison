@@ -14,12 +14,14 @@ export default function Signup(props) {
 
     const handleSubmit = async(e)=>{
 
+      props.setProgress(20)
+
         e.preventDefault(); // To avoid page reloading
 
         let url = "http://localhost:3000/api/auth/createuser"
 
 
-
+        props.setProgress(40)
         
   // Default options are marked with *
   const response = await fetch(url, {
@@ -31,6 +33,8 @@ export default function Signup(props) {
     body: JSON.stringify({email:credentials.email,password:credentials.password,name:credentials.name}), 
   });
 
+  props.setProgress(70)
+
 
    const json = await response.json(); 
 
@@ -38,7 +42,10 @@ export default function Signup(props) {
 
   //  console.log(json)
 
+  props.setProgress(100)
+
   if (json.success){
+    
 
     navigate("/");
 

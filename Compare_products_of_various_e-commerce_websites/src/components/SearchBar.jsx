@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import './searchBar.css';
 import { json } from 'react-router-dom';
 import productContext from '../../context/products/Productcontext';
-export default function SearchBar() {
+import LoadingBar from 'react-top-loading-bar'
+export default function SearchBar(props) {
 
   const [input,setInput] = useState("")
   const context = useContext(productContext)
@@ -21,9 +22,13 @@ export default function SearchBar() {
 
   const handleClick = async()=>{
 
+    props.setProgress(20)
+
     let response = await fetch("http://localhost:3000/api/product")
 
     response = await response.json()
+
+    props.setProgress(50)
 
     console.log(response)
 
@@ -32,9 +37,13 @@ export default function SearchBar() {
       return item.title.toLowerCase().includes(input.toLowerCase())
     })
 
+    props.setProgress(70)
+
     console.log(results)
 
     setProducts(results)
+
+    props.setProgress(100)
 
   }
 

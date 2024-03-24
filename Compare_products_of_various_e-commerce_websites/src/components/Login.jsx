@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import productContext from '../../context/products/Productcontext'
 import { useNavigate } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 export default function Login(props) {
 
     let product_context = useContext(productContext)
@@ -14,9 +15,13 @@ export default function Login(props) {
 
     const handleSubmit = async(e)=>{
 
+      props.setProgress(20)
+
         e.preventDefault(); // To avoid page reloading
 
         let url = "http://localhost:3000/api/auth/loginuser"
+
+        props.setProgress(40)
 
 
 
@@ -31,12 +36,16 @@ export default function Login(props) {
     body: JSON.stringify({email:credentials.email,password:credentials.password}), 
   });
 
+  props.setProgress(70)
+
 
    const json = await response.json(); 
 
   // console.log("About to print json after fetching loginuser url")
 
   //  console.log(json)
+
+  props.setProgress(100)
 
   if (json.success){
 

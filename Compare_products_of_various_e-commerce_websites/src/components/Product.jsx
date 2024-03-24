@@ -84,6 +84,7 @@ export default function Product(props) {
 {/* {console.log(loading)} */}
 {/* {loading && <Spinner/>} */}
 {console.log(loading)}
+<div className="container d-flex justify-content-center">
 <InfiniteScroll
           dataLength={products.length}
           next={fetchMoreData}
@@ -96,9 +97,9 @@ export default function Product(props) {
           
       
 
-    <div className="row" style={{marginTop:'20px' }}>
+    <div className="row" style={{marginTop:'20px',width:'500px' }}>
       {loading?"":products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
-        return  <div className="col-md-4 my-2">
+        return  <div className="my-2">
           {console.log(product)}
         <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>
         </div>
@@ -109,6 +110,7 @@ export default function Product(props) {
 </div>
 </div>   
 </InfiniteScroll>
+</div>
     </>
   )
 }

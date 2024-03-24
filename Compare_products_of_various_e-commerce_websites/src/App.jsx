@@ -11,7 +11,7 @@ import Alert from './components/Alert'
 import SearchBar from './components/SearchBar'
 import Display_Cart from './components/Display_Cart'
 import Cartstate from '../context/cart/Cartstate'
-
+import LoadingBar from 'react-top-loading-bar'
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +19,7 @@ import {
 } from "react-router-dom";
 function App() {
 
+  const [progress,setProgress] = useState(0)
 
 
   const [alert,setAlert] = useState(null)
@@ -47,7 +48,13 @@ function App() {
 
     <Navbar/>
 
-    <SearchBar/>
+    <LoadingBar
+        color='#f11946'
+        progress={progress}
+  
+      />
+
+    <SearchBar progress={progress} setProgress={setProgress}/>
 
     
 
@@ -56,8 +63,8 @@ function App() {
        
           <Route exact path="/" element={<Home alert={alert} showAlert={showAlert}/>}></Route>
 
-          <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert}/>}></Route>
-          <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert}/>}></Route>
+          <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert} progress={progress} setProgress={setProgress}/>}></Route>
+          <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert} progress={progress} setProgress={setProgress}/>}></Route>
           <Route exact path="/displaycart" element={<Display_Cart alert={alert} showAlert={showAlert}/>}></Route>
 
         </Routes>
