@@ -3,7 +3,10 @@ import productContext from '../../context/products/Productcontext'
 import { useNavigate } from "react-router-dom";
 export default function Signup(props) {
 
-    let context = useContext(productContext)
+    let product_context = useContext(productContext)
+
+
+    let {showAlert} = props
 
     const navigate = useNavigate();
 
@@ -13,7 +16,7 @@ export default function Signup(props) {
 
         e.preventDefault(); // To avoid page reloading
 
-        let url = "http://localhost:3000/auth/createuser"
+        let url = "http://localhost:3000/api/auth/createuser"
 
 
 
@@ -39,13 +42,15 @@ export default function Signup(props) {
 
     navigate("/");
 
-    props.showAlert("User Created Successfully","success")
+    localStorage.setItem("authtoken",json.authtoken)
+
+    showAlert("User Created Successfully","success")
 
   }
 
   else{
 
-    props.showAlert("Enter Valid Login Credentials","danger")
+    showAlert("Enter Valid Login Credentials","danger")
 
 
   }

@@ -3,7 +3,10 @@ import productContext from '../../context/products/Productcontext'
 import { useNavigate } from "react-router-dom";
 export default function Login(props) {
 
-    let context = useContext(productContext)
+    let product_context = useContext(productContext)
+
+
+    let {showAlert} = props
 
     const navigate = useNavigate();
 
@@ -13,7 +16,7 @@ export default function Login(props) {
 
         e.preventDefault(); // To avoid page reloading
 
-        let url = "http://localhost:3000/auth/loginuser"
+        let url = "http://localhost:3000/api/auth/loginuser"
 
 
 
@@ -37,7 +40,8 @@ export default function Login(props) {
 
   if (json.success){
 
-    props.showAlert("User Logged In Successfully","success")
+    showAlert("User Logged In Successfully","success")
+    localStorage.setItem("authtoken",json.authtoken)
     navigate("/");
 
 
@@ -45,7 +49,7 @@ export default function Login(props) {
 
   else{
 
-    props.showAlert("Enter Valid Login Credentials","danger")
+    showAlert("Enter Valid Login Credentials","danger")
   }
 
 

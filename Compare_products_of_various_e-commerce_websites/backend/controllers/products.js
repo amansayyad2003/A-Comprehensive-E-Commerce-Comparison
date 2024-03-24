@@ -4,13 +4,18 @@ const getAllProducts = async(req,res)=>{
 
     console.log("Inside get all products")
 
-    const {price,title,sort,select} = req.query;
+    const {price,title,sort,select,image} = req.query;
 
     const queryObject = {};
 
     if (price){
 
         queryObject.price = price
+    }
+
+    if (image){
+
+        queryObject.image = image
     }
 
   
@@ -24,7 +29,7 @@ const getAllProducts = async(req,res)=>{
      let page = Number(req.query.page) || 1
     console.log("Printing page")
     console.log(page)
-    let pageSize = Number(req.query.pageSize) || 5
+    let pageSize = Number(req.query.pageSize) || 21
 
     let skip = (page-1)*pageSize
 

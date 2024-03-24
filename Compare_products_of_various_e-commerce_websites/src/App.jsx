@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -9,6 +9,8 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Alert from './components/Alert'
 import SearchBar from './components/SearchBar'
+import Display_Cart from './components/Display_Cart'
+import Cartstate from '../context/cart/Cartstate'
 
 import {
   BrowserRouter as Router,
@@ -16,6 +18,8 @@ import {
   Route,
 } from "react-router-dom";
 function App() {
+
+
 
   const [alert,setAlert] = useState(null)
 
@@ -28,13 +32,17 @@ function App() {
       setTimeout(()=>{
 
         setAlert(null)
-      },1500)
+      },1000)
   }
+
+
 
   return (
     <>
     {/* so that all states in product state can be accsessed by all the components wrapped inside it */}
+
     <Productstate> 
+      <Cartstate>
     <Router>
 
     <Navbar/>
@@ -46,17 +54,20 @@ function App() {
     <Alert alert={alert}/>
     <Routes>
        
-          <Route exact path="/" element={<Home alert={alert} showAlert={showAlert} />}></Route>
+          <Route exact path="/" element={<Home alert={alert} showAlert={showAlert}/>}></Route>
 
-          <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert} />}></Route>
-          <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert} />}></Route>
+          <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert}/>}></Route>
+          <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert}/>}></Route>
+          <Route exact path="/displaycart" element={<Display_Cart alert={alert} showAlert={showAlert}/>}></Route>
 
         </Routes>
 
 
     </Router>
+    </Cartstate>
 
     </Productstate>
+
      
     </>
   )

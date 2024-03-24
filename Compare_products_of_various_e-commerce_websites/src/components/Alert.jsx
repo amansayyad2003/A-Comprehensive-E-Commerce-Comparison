@@ -10,7 +10,7 @@ export default function Alert(props) {
     }
   return (
     <div>
-    {props.alert &&  <div class={`alert alert-${props.alert.type}` }role="alert">
+    {props.alert &&  <div className={`alert fixed-top alert-${props.alert.type}` }role="alert">
     <b>{capitalizeFirstLetter(props.alert.type)}</b> : {props.alert.message}
 </div>
      }    

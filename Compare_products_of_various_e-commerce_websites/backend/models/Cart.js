@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 // same as Product
-const productSchema = new Schema({
+const cartSchema = new Schema({
 
     user:{
         // dusre object ki object id -> ye nahi samjha hai!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -36,4 +36,4 @@ const productSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("product",productSchema) // create a model user using userSchema
+module.exports = mongoose.model("cart",cartSchema) // create a model user using userSchema
