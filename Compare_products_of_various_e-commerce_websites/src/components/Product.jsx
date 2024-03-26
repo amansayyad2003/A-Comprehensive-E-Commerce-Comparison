@@ -74,7 +74,7 @@ export default function Product(props) {
 
       useEffect(()=>{
 
-        updateProducts();
+        // updateProducts();
       },[])
 
 

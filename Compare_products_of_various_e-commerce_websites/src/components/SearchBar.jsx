@@ -50,7 +50,7 @@ export default function SearchBar(props) {
   return (
     <div className="search-container">
       <div className="box">
-        <input type="text" placeholder="Search..." value={input} onChange={(e)=>onChange(e.target.value)}/>
+        <input type="text" placeholder="What are you looking for..." value={input} onChange={(e)=>onChange(e.target.value)}/>
         <a href="#">
           <i className="fas fa-search" onClick={handleClick}></i>
         </a>
