@@ -43,7 +43,7 @@ def get_google_search_url(query):
     return None
 
 # query = "flipkart Samsung Galaxy A14 5G"
-# query = "croma SAMSUNG Galaxy S24 5G (8GB RAM, 256GB, Onyx Black)"
+# query = "croma FUJIFILM Instax Treasure Box Mini 11 Instant Camera  (Purple)"
 # get_google_search_url(query)
 
 # print(urls)
@@ -53,7 +53,7 @@ def get_google_search_url(query):
 
 
 def extract_product_details_croma(url):
-    print(url)
+    # print(url)
     # Your code to fetch HTML content from the URL and extract <script> tags
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
@@ -63,11 +63,12 @@ def extract_product_details_croma(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
 
+        # print(soup)
         scripts = soup.find_all('script', type='application/ld+json')
         # Iterate through <script> tags
+        # print(scripts)
         for script in scripts:
             try:
-                print(script)
                 # Attempt to load JSON data from the <script> tag contents
                 script_data = json.loads(''.join(script.contents))
 
@@ -75,18 +76,18 @@ def extract_product_details_croma(url):
                 if script_data.get("@type") == "Product":
                     name = script_data.get('name', 'N/A')
                     price = script_data['offers'].get('price', 'N/A')
-                    image = script_data.get('image', 'N/A')
+                    image = script_data.get('image', 'N/A')[0]
                     # Extract the rating value from the first product object
                     # Extracting the required information
                     rating_value = script_data['review']['reviewRating']['ratingValue']
                     review_count = script_data['review']['reviewCount']
                     brand_name = script_data['brand']['name']
                     rating_value = (int(script_data['review']['reviewRating']['bestRating']) + int(script_data['review']['reviewRating']['worstRating']))/2
-                    product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value}
+                    product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
                     return product_details
             except json.JSONDecodeError:
                 # Handle JSON decoding errors (truncated data)
-                print("JSON decoding error. Data may be truncated.")
+                # print("JSON decoding error. Data may be truncated.")
                 # Attempt to recover from truncated data
 
                 # Check if the last character is '}' to see if data is truncated
@@ -100,13 +101,13 @@ def extract_product_details_croma(url):
                         if script_data.get("@type") == "Product":
                             name = script_data.get('name', 'N/A')
                             price = script_data['offers'].get('price', 'N/A')
-                            image = script_data.get('image', 'N/A')
+                            image = script_data.get('image', 'N/A')[0]
                             # Extract the rating value from the first product object
                             # rating_value = (script_contents['review']['reviewRating']['bestRating'] + script_contents['review']['reviewRating']['worstRating'])/2
                             # review_count = script_data['review']['reviewCount']
                             brand_name = script_data['brand']['name']
                             rating_value = (int(script_data['review']['reviewRating']['bestRating']) + int(script_data['review']['reviewRating']['worstRating']))/2
-                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value}
+                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
                             return product_details
                             # return script_data
                     except json.JSONDecodeError:
@@ -116,7 +117,7 @@ def extract_product_details_croma(url):
                             script_contents = script_contents.strip()
                             script_contents = script_contents[:-1]
                             # print(type(script_contents))
-                        print("---------------------------------")
+                        # print("---------------------------------")
                         # print(script_contents)
                         # Sanitize the JSON string
                         script_contents = script_contents.replace('<p>', '').replace('</p>', '').replace('<br />', '').replace('&nbsp;', '')
@@ -131,17 +132,18 @@ def extract_product_details_croma(url):
                         if script_contents.get("@type") == "Product":
                             name = script_contents.get('name', 'N/A')
                             price = script_contents['offers'].get('price', 'N/A')
-                            image = script_contents.get('image', 'N/A')
+                            image = script_contents.get('image', 'N/A')[0]
                             # Extract the rating value from the first product object
                             rating_value = (int(script_contents['review']['reviewRating']['bestRating']) + int(script_contents['review']['reviewRating']['worstRating']))/2
                             # review_count = script_contents['review']['reviewCount']
                             brand_name = script_contents['brand']['name']
-                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value}
+                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
                             return product_details
                             # return script_data
-                        print("Failed to recover from truncated data.")
+                        # print("Failed to recover from truncated data.")
                 else:
-                    print("Data is still truncated. Unable to recover.")
+                    continue
+                    # print("Data is still truncated. Unable to recover.")
 
     # If no valid product data is found
     return None
@@ -162,7 +164,7 @@ def extract_product_details_flipkart(url):
         # Iterate through <script> tags
         # print(scripts)
         for script in scripts:
-            print(script)
+            # print(script)
             # Extract content of the script tag
             script_content = script.string
 
@@ -187,7 +189,7 @@ def extract_product_details_flipkart(url):
                             rating_value = item['aggregateRating']['ratingValue']
                             review_count = item['aggregateRating']['reviewCount']
                             brand_name = item['brand']['name']
-                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, 'review count': review_count, 'Brand Name': brand_name}
+                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, 'brand_Name': brand_name}
                             return product_details
                             # price = item.
                             # print("Name:", item.get('name', 'N/A'))
@@ -208,7 +210,7 @@ def extract_product_details_flipkart(url):
                         review_count = data[0]['aggregateRating']['reviewCount']
                         # Extract the brand name from the first product object
                         brand_name = data[0]['brand']['name']
-                        product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, 'review count': review_count, 'Brand Name': brand_name}
+                        product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, 'Brand Name': brand_name}
                         return product_details
                         # print("Name:", data.get('name', 'N/A'))
                         # if 'offers' in data:
@@ -228,16 +230,26 @@ def extract_product_details_flipkart(url):
 def get_product_details_all_website(product):
     website_names = ['croma']
     query = product["title"] 
+    # print(query)
     for i in website_names:
+        i = i + query
         get_google_search_url(i)
         for i in urls:
             croma_product_details = extract_product_details_croma(i)
-            if product_details is not None:
+            if croma_product_details is not None:
                 croma_product_details["website_url"] = i
                 break
-        flipkart_product_details = extract_product_details_flipkart(product_details["website_url"])
-        product_details = flipkart_product_details + croma_product_details
-        product_details["website_url"] = product_details["website_url"]
+        flipkart_product_details = extract_product_details_flipkart(product["website_url"])
+        flipkart_product_details["website_url"] = str(product["website_url"])
+        # print(croma_product_details)
+        # print(flipkart_product_details)
+        product_details = [flipkart_product_details, croma_product_details]
+        # print(product_details)
         return product_details
+
+# Example 
+product = {'title': 'FUJIFILM Instax Treasure Box Mini 11 Instant Camera', 'price': '₹6,499', 'imgage_url': 'https://rukminim2.flixcart.com/image/312/312/kp2y2kw0/instant-camera/3/z/r/treasure-box-mini-11-instax-mini-11-fujifilm-original-imag3efzmkzvretx.jpeg?q=70', 'website_url': 'https://www.flipkart.com/fujifilm-instax-treasure-box-mini-11-instant-camera/p/itme77e0804bcc36?pid=INAG37FNY2WHY9XG&lid=LSTINAG37FNY2WHY9XGLEXRCE&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=f844a016-6a36-44ae-b34b-651b98c02329.INAG37FNY2WHY9XG.SEARCH&ppt=None&ppn=None&ssid=u74fs3w0og0000001712161085303&qH=dd6d2dcc679d12b9'}
+
+print(get_product_details_all_website(product))
 
     

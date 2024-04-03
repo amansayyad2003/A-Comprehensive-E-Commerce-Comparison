@@ -25,15 +25,15 @@ def extract(url):
 def transform(soup):
         # Find the specific elements containing the data you're interested in
         # For example, if you're interested in product titles, you might do:
+        # print(soup)
         products = soup.find_all("div", class_="_2kHMtA")
-        # print(products)
         for product in products:
             try:
                 title = product.find('div', class_="_4rR01T").text
                 # print(title)
                 img_url = product.find('img', class_="_396cs4").get('src')
                 price = product.find('div', {'class' : ["_30jeq3", "_1_WHN1"]}).text
-                website_url = base_url + product.find('a', {'class' : ['_2rpwqI']}).get('href')
+                website_url = base_url + product.find('a', {'class' : ['_2rpwqI', '_1fQZEK']}).get('href')
             except:
                 continue
             product_details  = {"title":title, "price": price, "imgage_url": img_url, 'website_url': website_url}
@@ -41,11 +41,12 @@ def transform(soup):
             products_details.append(product_details)
 
 # Example usage:
-search_query = "camera"
-url = generate_indeed_url(search_query)
-print(url)
-soup = extract(url)
-transform(soup)
+#search_query = "camera"
+#url = generate_indeed_url(search_query)
+#print(url)
+#soup = extract(url)
+#transform(soup)
+#print(products_details)
 # for i in products_details:
 #     print(i)
 
@@ -53,4 +54,8 @@ def get_all_product(search_query):
     url = generate_indeed_url(search_query)
     soup = extract(url)
     transform(soup)
-    return product_details
+    return products_details
+
+product_details = get_all_product("camera")
+for i in product_details:
+    print(i)
