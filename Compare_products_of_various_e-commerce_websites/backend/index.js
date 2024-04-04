@@ -21,4 +21,5 @@ app.use('/api/cart',require('./routes/cart'))
 
 app.listen(port, () => {
   console.log(`Compare Craft listening on port http://localhost:${port}`)
+
 })

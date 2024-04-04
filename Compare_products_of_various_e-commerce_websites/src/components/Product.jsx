@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import productContext from '../../context/products/Productcontext'
 import Display_Product from './Display_Product'
-// import Spinner from './Spinner';
+import Spinner from './Spinner';
 import axios from "axios"
 import InfiniteScroll from "react-infinite-scroll-component";
+import Inputcontext from '../../context/searchBar/Inputcontext';
 export default function Product(props) {
     const context = useContext(productContext)
     const [loading,setLoading] = useState(false)
     const {products,setProducts} = context // destructuring
     const [page,setPage]= useState(1)
     const [totalResults,setTotalResults]= useState(0)
+    const {Input,setInput} = useContext(Inputcontext)
 
     let API_URL = "http://localhost:3000/api/product"
 
@@ -90,7 +92,7 @@ export default function Product(props) {
           next={fetchMoreData}
           hasMore={products.length<=totalResults}
           // loader={<Spinner/>}
-          loader={<h3>Loading...</h3>}
+          loader={<h3>Loading</h3>}
         >
 
           <div className="container">
@@ -98,7 +100,7 @@ export default function Product(props) {
       
 
     <div className="row" style={{marginTop:'20px',width:'500px' }}>
-      {loading?"":products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
+      {loading?"":Input.length !== 0 && products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
         return  <div className="my-2">
           {console.log(product)}
         <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>

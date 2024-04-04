@@ -12,6 +12,9 @@ import SearchBar from './components/SearchBar'
 import Display_Cart from './components/Display_Cart'
 import Cartstate from '../context/cart/Cartstate'
 import LoadingBar from 'react-top-loading-bar'
+import Product_Comparison_Page from './components/Product_Comparison_Page'
+// import { temp_search_bar } from './components/temp_search_bar'
+import Inputstate from '../context/searchBar/Inputstate'
 import {
   BrowserRouter as Router,
   Routes,
@@ -42,6 +45,8 @@ function App() {
     <>
     {/* so that all states in product state can be accsessed by all the components wrapped inside it */}
 
+    <Inputstate>
+
     <Productstate> 
       <Cartstate>
     <Router>
@@ -53,9 +58,12 @@ function App() {
         progress={progress}
   
       />
-
+   <div className="search-bar-container">
     <SearchBar progress={progress} setProgress={setProgress}/>
-
+    </div>
+    {/* <temp_search_bar/> */}
+    
+    {/* <temp/> */}
     
 
     <Alert alert={alert}/>
@@ -66,6 +74,7 @@ function App() {
           <Route exact path="/login" element={<Login alert={alert} showAlert={showAlert} progress={progress} setProgress={setProgress}/>}></Route>
           <Route exact path="/signup" element={<Signup alert={alert} showAlert={showAlert} progress={progress} setProgress={setProgress}/>}></Route>
           <Route exact path="/displaycart" element={<Display_Cart alert={alert} showAlert={showAlert}/>}></Route>
+          {/* <Route exact path="/product-comparison" element={<Product_Comparison_Page/>}></Route> */}
 
         </Routes>
 
@@ -75,6 +84,7 @@ function App() {
 
     </Productstate>
 
+    </Inputstate>
      
     </>
   )
