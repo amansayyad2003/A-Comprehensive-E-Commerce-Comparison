@@ -12,29 +12,60 @@ export default function SearchBar(props) {
   const {Input,setInput} = useContext(Inputcontext)
 
 
-  const fetchData = async(value) => {
+  const fetchData = async(value,check) => {
     props.setProgress(20)
 
-    let response = await fetch("http://localhost:3000/api/product")
 
-    response = await response.json()
+    try {
+
+      const url = `http://localhost:3000/api/python?searchTerm=${encodeURIComponent(value)}`
+
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          // Convert search term to JSON and send it as the query parameter
+          
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to execute Python script');
+      }
+
+      const result = await response.json();
+      console.log('Result from backend:', result['result']);
+      props.setProgress(70)
+      
+    setProducts(result['result'])
+  } catch (error) {
+      console.error('Error:', error);
+  }
+
+    
+    // response = await response.json()
+    // console.log(response)
 
     props.setProgress(50)
 
-    console.log(response)
+    // console.log("About to print response")
 
-    const results = response.mydata.filter((item)=>{
+    // console.log(response)
+
+    // console.log("printed response")
+
+
+    // const results = response.mydata.filter((item)=>{
     
-      return item.title.toLowerCase().includes(Input.toLowerCase())
-    })
+    //   return item.title.toLowerCase().includes(Input.toLowerCase())
+    // })
 
-    props.setProgress(70)
 
-    console.log(results)
 
-    setProducts(results)
+    // console.log(results)
 
-    props.setProgress(100)
+
+    // props.setProgress(100)
   };
 
   const handleClick = (value)=>{
@@ -50,11 +81,11 @@ export default function SearchBar(props) {
 
   return (
     <div className='input-wrapper'>
-      <FaSearch id="search-icon" onClick={(e) => handleClick(e.target.value)}/>
+      <FaSearch id="search-icon" onClick={(e) => handleClick(e.target.value,1)}/>
       <input
         placeholder="What are you looking for..."
         value={Input}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value,0)}
       />
     </div>
   )

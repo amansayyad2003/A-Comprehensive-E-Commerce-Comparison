@@ -1,30 +1,41 @@
 const Product = require("../models/Product")
 
+/*
+product_details = {"title": title, "price": price, "image_url_url": img_url, 'website_url': website_url}
+*/
+
 const getAllProducts = async(req,res)=>{
 
     console.log("Inside get all products")
 
-    const {price,title,sort,select,image} = req.query;
+    const {price,title,sort,select,image_url,website_url} = req.query;
 
     const queryObject = {};
-
-    if (price){
-
-        queryObject.price = price
-    }
-
-    if (image){
-
-        queryObject.image = image
-    }
-
-  
 
     if (title){
 
 
         queryObject.title = {$regex:title,$options:"i"}
     }
+
+    if (price){
+
+        queryObject.price = price
+    }
+
+    if (image_url){
+
+        queryObject.image_url = image_url
+    }
+
+    if (website_url){
+
+        queryObject.website_url = website_url
+    }
+
+  
+
+    
 
      let page = Number(req.query.page) || 1
     console.log("Printing page")

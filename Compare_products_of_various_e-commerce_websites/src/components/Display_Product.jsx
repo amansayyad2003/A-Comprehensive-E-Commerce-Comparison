@@ -22,12 +22,12 @@ export default function Display_product(props) {
   return (
     <div className="product-container">
       <div className="image-container">
-        <img src={props.product.image} width={470} height={300} alt={props.product.title} />
+        {/* <img src={props.product.image} width={470} height={300} alt={props.product.title} /> */}
       </div>
       <div className="info-container">
         <h5 className="card-title">{props.product.title}</h5>
         <p>₹{props.product.price}</p>
-        <p className="card-text">{props.product.description}</p>
+        {/* <p className="card-text">{props.product.description}</p> */}
         <p>
           <Link to="/product-comparison" className="btn btn-primary">View Product Comparison</Link>
         </p>
