@@ -11,6 +11,10 @@ export default function SearchBar(props) {
   const {products,setProducts} = context 
   const {Input,setInput} = useContext(Inputcontext)
 
+  const addNewProducts = (newProducts) => {
+    setProducts([...products, ...newProducts]);
+  };
+
 
   const fetchData = async(value,check) => {
     props.setProgress(20)
@@ -36,8 +40,27 @@ export default function SearchBar(props) {
       const result = await response.json();
       console.log('Result from backend:', result['result']);
       props.setProgress(70)
+
+      // addNewProducts(result['result'])
       
-    setProducts(result['result'])
+    // setProducts(result['result'])
+
+      const dead = result['result']
+      console.log("Printing type of dead:", typeof dead);
+    console.log("Original JSON string:", dead);
+  
+      const cleanedStr = dead.replace(/'/g, '"').replace(/,\s+/g, ',');
+      console.log("Cleaned JSON string:", cleanedStr);
+
+    const list = JSON.parse(cleanedStr);
+    console.log("Parsed JSON data:", list);
+
+    console.log("Printing type of list:", typeof list);
+
+    setProducts(list)
+
+    
+
   } catch (error) {
       console.error('Error:', error);
   }

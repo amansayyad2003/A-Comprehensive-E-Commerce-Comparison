@@ -4,6 +4,8 @@ import Display_Cart from './Display_Cart';
 import CartContext from '../../context/cart/Cartcontext';
 
 export default function Display_product(props) {
+  // {console.log("Trying to print title of product inside Display_prdoduct")}
+  // {console.log(props.product.title)}
   const [image, setImage] = useState("");
   const context = useContext(CartContext);
   const { fetch_cart, addToCart, deleteFromCart } = context;
@@ -36,5 +38,6 @@ export default function Display_product(props) {
         </div>
       </div>
     </div>
+    
   );
 }

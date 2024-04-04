@@ -3,6 +3,7 @@ import productContext from './Productcontext'
 import axios from "axios"
 export default function Productstate(props) {
 
+  // const [products,setProducts] = useState([{"title":"","price":"","image_url":"","website_url":""}])
   const [products,setProducts] = useState([])
 
  

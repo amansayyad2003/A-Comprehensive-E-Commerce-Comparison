@@ -12,6 +12,13 @@ export default function Product(props) {
     const [page,setPage]= useState(1)
     const [totalResults,setTotalResults]= useState(0)
     const {Input,setInput} = useContext(Inputcontext)
+    const [productList,setProductList] = useState([])
+
+   
+
+    let cleanedStr = ""
+
+    let list = []
 
     let API_URL = "http://localhost:3000/api/product"
 
@@ -48,15 +55,15 @@ export default function Product(props) {
     const updateProducts = async() => {
 
       
-        console.log("Inside update products")
+        // console.log("Inside update products")
   
         let url = `${API_URL}?page=${page}&pageSize=${pageSize}`
 
         // props.setProgress(30);
 
         const response = await axios.get(url);
-        console.log("Printing response")
-        console.log(response)
+        // console.log("Printing response")
+        // console.log(response)
 
         setProducts(response.data.mydata)
 
@@ -83,9 +90,14 @@ export default function Product(props) {
 
   return (
     <>
-{/* {console.log(loading)} */}
-{/* {loading && <Spinner/>} */}
-{console.log(loading)}
+{/* 
+    {console.log("About to print type of products received by Product.jsx")}
+    {console.log(typeof products)}
+    {console.log("About to print full products received by Product.jsx")}
+    {console.log(products)} */}
+
+
+
 <div className="container d-flex justify-content-center">
 <InfiniteScroll
           dataLength={products.length}
@@ -115,6 +127,12 @@ export default function Product(props) {
 </div>   
 </InfiniteScroll>
 </div>
+
+
+
+
+        
+
     </>
   )
 }
