@@ -1,43 +1,22 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Added to include padding and border in the element's total width and height */
-}
-.container{
-    display: flex;
-    justify-content: space-around; /* Adjust alignment */
-    width: 100vw; /* Set container to cover the whole viewport width */
-    height: 100vh; /* Set container to cover the whole viewport height */
-}
-.container > div {
-    flex: 1; /* Each box should take equal space */
-    border: 1px solid black; /* Just for visualization */
-    padding: 20px; /* Added padding for better spacing */
-    text-align: center; /* Center align text */
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* Additional styles for product section */
-.product-section {
-    text-align: center;
-    padding: 20px;
-}
-.product-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px; /* Add margin at the bottom for space */
-}
-.product-title,
-.product-description {
-    margin-bottom: 10px; /* Add margin at the bottom for space */
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
 
-/* Additional styles for price and rating */
-.price {
-    font-weight: bold;
-    color: green;
-    margin-bottom: 10px;
+th {
+    background-color: #f2f2f2;
 }
-.rating {
-    font-style: italic;
-    color: gray;
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #ddd;
 }
