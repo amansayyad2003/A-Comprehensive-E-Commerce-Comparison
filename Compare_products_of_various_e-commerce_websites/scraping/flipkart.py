@@ -25,16 +25,31 @@ def extract(url):
 def transform(soup):
         # Find the specific elements containing the data you're interested in
         # For example, if you're interested in product titles, you might do:
-        # print(soup)
-        products = soup.find_all("div", class_="_2kHMtA")
+        products = soup.find_all("div", {'class': ["_1xHGtK", "_373qXS", "_4ddWXP", "_2kHMtA"]})
+        # if len(products) == 0:
+        #     products = soup.find_all("div", {'class': ["_1xHGtK", "_373qXS", "_4ddWXP"]})
+
+        # print(products)
         for product in products:
+            # print(product)
             try:
-                title = product.find('div', class_="_4rR01T").text
+                try:
+                    title = product.find('div', class_="_4rR01T").text
+                except:
+                    title = product.find('a', {'class': ["IRpwTa", "s1Q9rs"]}).get('title')
                 # print(title)
-                img_url = product.find('img', class_="_396cs4").get('src')
+                # img_url = product.find('img', class_="_396cs4").get('src')
+                # price = product.find('div', {'class' : ["_30jeq3", "_1_WHN1"]}).text
+                # website_url = base_url + product.find('a', {'class' : ['_2rpwqI', '_1fQZEK']}).get('href')
+                img_url = product.find('img', {'class' : ["_396cs4", "_2r_T1I"]}).get('src')
                 price = product.find('div', {'class' : ["_30jeq3", "_1_WHN1"]}).text
-                website_url = base_url + product.find('a', {'class' : ['_2rpwqI', '_1fQZEK']}).get('href')
+                website_url = base_url + product.find('a', {'class' : ["_2rpwqI", "_1fQZEK", "IRpwTa", "s1Q9rs"]}).get('href')
+                # print(website_url)
             except:
+               # try:
+               # title = product.find('a', {'class': ["IRpwTa", "s1Q9rs"]}).get('title')
+               # print(title)
+                # except:
                 continue
             product_details  = {"title":title, "price": price, "imgage_url": img_url, 'website_url': website_url}
             # print(product_details)
@@ -43,10 +58,12 @@ def transform(soup):
 
 def get_all_product(search_query):
     url = generate_indeed_url(search_query)
+    print(url)
     soup = extract(url)
     transform(soup)
     return products_details
 
-product_details = get_all_product("Smartphone")
+product_details = get_all_product("Roadster Men's Zipper Solid Cardigan")
+# print(product_details)
 for i in product_details:
     print(i)
