@@ -36,14 +36,14 @@ export default function Display_product(props) {
 
 
   return (
-    <div className="product-container">
+    <div className="product-container"  style={{ display: 'flex',width:'800px'}}>
 
      
       
       <div className="image-container">
-        <img src={props.product.image_url} width={470} height={300} alt={props.product.title} />
+        <img src={props.product.image_url} alt={props.product.title} />
       </div>
-      <div className="info-container">
+      <div className="info-container" style={{ marginLeft: '20px' }}>
         <h5 className="card-title">{props.product.title}</h5>
         <p style={{ fontSize: '1.2em' }}>₹{props.product.price}</p>
         {/* <p className="card-text">{props.product.description}</p> */}
