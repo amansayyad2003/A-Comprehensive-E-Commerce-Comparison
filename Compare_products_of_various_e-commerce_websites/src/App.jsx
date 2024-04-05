@@ -16,6 +16,7 @@ import Product_Comparison_Page from './components/Product_Comparison_Page'
 // import { temp_search_bar } from './components/temp_search_bar'
 import Inputstate from '../context/searchBar/Inputstate'
 import Imagestate from '../context/product_image/Imagestate'
+import Display_User_Name from './components/Display_User_Name'
 import {
   BrowserRouter as Router,
   Routes,
@@ -73,6 +74,7 @@ function App() {
 
     <Route exact path="/" element={<>
       <div className="search-bar-container">
+        <Display_User_Name/>
       <SearchBar progress={progress} setProgress={setProgress}/>
       </div>
       <Home alert={alert} showAlert={showAlert}/>

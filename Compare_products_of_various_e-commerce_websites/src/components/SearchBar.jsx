@@ -17,12 +17,17 @@ export default function SearchBar(props) {
 
 
   const fetchData = async(value,check) => {
-    props.setProgress(20)
+   
+    
 
 
     try {
 
+      props.setProgress(20)
+
       const url = `http://localhost:3000/api/python?searchTerm=${encodeURIComponent(value)}`
+
+      props.setProgress(50)
 
       const response = await fetch(url, {
           method: 'GET',
@@ -38,12 +43,8 @@ export default function SearchBar(props) {
       }
 
       const result = await response.json();
-      console.log('Result from backend:', result['result']);
       props.setProgress(70)
-
-      // addNewProducts(result['result'])
-      
-    // setProducts(result['result'])
+      console.log('Result from backend:', result['result']);
 
       const dead = result['result']
       console.log("Printing type of dead:", typeof dead);
@@ -53,11 +54,16 @@ export default function SearchBar(props) {
       console.log("Cleaned JSON string:", cleanedStr);
 
     const list = JSON.parse(cleanedStr);
+    
     console.log("Parsed JSON data:", list);
 
     console.log("Printing type of list:", typeof list);
 
     setProducts(list)
+
+    props.setProgress(100)
+
+   
 
     
 
@@ -65,30 +71,7 @@ export default function SearchBar(props) {
       console.error('Error:', error);
   }
 
-    
-    // response = await response.json()
-    // console.log(response)
-
-    props.setProgress(50)
-
-    // console.log("About to print response")
-
-    // console.log(response)
-
-    // console.log("printed response")
-
-
-    // const results = response.mydata.filter((item)=>{
-    
-    //   return item.title.toLowerCase().includes(Input.toLowerCase())
-    // })
-
-
-
-    // console.log(results)
-
-
-    // props.setProgress(100)
+  
   };
 
   const handleClick = (value)=>{

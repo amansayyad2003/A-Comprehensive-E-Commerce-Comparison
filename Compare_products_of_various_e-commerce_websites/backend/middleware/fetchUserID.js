@@ -10,7 +10,7 @@ const fetchUserID = (req,res,next)=>{
     try{
 
         console.log("I  here1\n")
-        const authtoken = req.header("auth-token")
+        const authtoken = req.header("authtoken")
         console.log("Printing auth token")
         console.log(authtoken)
         console.log("I  here2\n")

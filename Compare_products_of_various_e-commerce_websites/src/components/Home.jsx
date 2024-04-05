@@ -4,12 +4,15 @@ import Product from './Product'
 import productContext from '../../context/products/Productcontext'
 import Display_Cart from './Display_Cart'
 export default function Home(props) {
+
+   
   
 
 
 
   return (
     <div className='container'>
+
 
     <Sort_products/>    
 
