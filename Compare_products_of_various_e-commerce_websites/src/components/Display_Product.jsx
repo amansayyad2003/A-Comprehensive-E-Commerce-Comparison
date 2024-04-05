@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import Display_Cart from './Display_Cart';
 import CartContext from '../../context/cart/Cartcontext';
 
+
+
+
+
+
+
 export default function Display_product(props) {
-  // {console.log("Trying to print title of product inside Display_prdoduct")}
-  // {console.log(props.product.title)}
+  {console.log("Trying to print image of product inside Display_prdoduct")}
+  {console.log(props.product.image_url)}
   const [image, setImage] = useState("");
   const context = useContext(CartContext);
   const { fetch_cart, addToCart, deleteFromCart } = context;
@@ -21,10 +27,15 @@ export default function Display_product(props) {
     showAlert("Item Deleted From Cart Successfully", "success");
   };
 
+
+
   return (
     <div className="product-container">
+
+     
+      
       <div className="image-container">
-        {/* <img src={props.product.image} width={470} height={300} alt={props.product.title} /> */}
+        <img src={props.product.image_url} width={470} height={300} alt={props.product.title} />
       </div>
       <div className="info-container">
         <h5 className="card-title">{props.product.title}</h5>
