@@ -48,8 +48,8 @@ router.post("/addtocart",fetchUserID,async(req,res)=>{
     let cart = await Cart_model.create({
       title: req.body.title,
       price: req.body.price,
-      image: req.body.image,
-      description: req.body.description,
+      image_url: req.body.image_url,
+      website_url: req.body.website_url,
       user:req.user.id
     });
 

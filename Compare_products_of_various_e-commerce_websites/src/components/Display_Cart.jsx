@@ -30,6 +30,8 @@ export default function Display_Cart(props) {
           <h3 className="text-center my-3">Your Cart is Empty</h3>
         ) : (
           cart.map((product) => {
+            console.log("Printing product inside cart")
+            console.log(product)
             return (
               <div className="col-md-4 my-2" key={product.id}>
                 <Display_product product={product} cart_action={"Delete from Cart"} showAlert={props.showAlert}/>

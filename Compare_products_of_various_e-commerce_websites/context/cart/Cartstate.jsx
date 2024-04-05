@@ -16,7 +16,7 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":localStorage.getItem("authtoken")
+          "authtoken":localStorage.getItem("authtoken")
         },
         
       });
@@ -34,6 +34,8 @@ export default function Cartstate(props) {
 
   const addToCart = async(product)=>{
 
+    {console.log("INSIDE addToCart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")}
+
     let url = "http://localhost:3000/api/cart/addtocart"
 
     
@@ -44,10 +46,10 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":localStorage.getItem("authtoken")
+          "authtoken":localStorage.getItem("authtoken")
         },
 
-        body: JSON.stringify({title:product.title,description:product.description,image:product.image,price:product.price}),
+        body: JSON.stringify({title:product.title,website_url:product.website_url,image_url:product.image_url,price:product.price}),
         
       });
       const added_item = await response.json(); // parses JSON response into native JavaScript objects
@@ -76,7 +78,7 @@ export default function Cartstate(props) {
   
         headers: {
           "Content-Type": "application/json",
-          "auth-token":localStorage.getItem("authtoken")
+          "authtoken":localStorage.getItem("authtoken")
         },
         
       });

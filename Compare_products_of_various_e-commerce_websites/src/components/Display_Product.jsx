@@ -54,7 +54,10 @@ export default function Display_product(props) {
           }}>View Product Comparison</Link>
         </p>
         <div>
-          <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div>
+          {/* <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div> */}
+          <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart(); setImage_url(props.product.image_url); setTitle(props.product.title); } : () => { deletefromCart(props.product._id) }}>
+    {props.cart_action}
+  </div>
         </div>
       </div>
     </div>

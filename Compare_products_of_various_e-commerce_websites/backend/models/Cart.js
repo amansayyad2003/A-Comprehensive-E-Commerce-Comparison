@@ -17,11 +17,11 @@ const cartSchema = new Schema({
     type:Number,
     require:true
   },
-  image:
+  image_url:
     {
       type:String
     },
-  description:{
+    website_url:{
     type:String,
     require:true
   },
