@@ -29,7 +29,7 @@ function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+          <Link className="nav-link active" aria-current="page" to="/" style={{ fontSize: '20px' }}> Home</Link>
         </li>   
       </ul>
       
@@ -40,7 +40,8 @@ function Navbar() {
       <Link to="/signup" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Sign Up</Link></form>
   :<button type="button" className="btn btn-primary mx-2" onClick={handleLogout}>Logout</button>}
 
-    <Link to="/displaycart"><i className="fa-solid fa-cart-shopping"></i></Link>
+    <Link to="/displaycart"><i className="fa-solid fa-cart-shopping mx-2"></i></Link>
+    <h5 style={{ marginTop: '10px' }} >Cart</h5>
     {/* <Link className="btn btn-primary mx-2" to="/TODO" role="button">View Cart</Link> */}
   </div>
 </nav>

@@ -98,44 +98,14 @@ export default function Product(props) {
 
 
 
-{/* <div className="container d-flex justify-content-center">
-<InfiniteScroll
-          dataLength={products.length}
-          next={fetchMoreData}
-          hasMore={products.length<=totalResults}
-          // loader={<Spinner/>}
-          loader={<h3>Loading</h3>}
-        >
 
-          <div className="container">
-          
-      {console.log("About to print products eceived by Product.jsx")}
-      {console.log(products)}
+<div >
+ 
 
-    <div className="row" style={{marginTop:'20px',width:'1500px' }}>
-      {loading?<Spinner/>:Input.length !== 0 && products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
-        return  <div className="my-2">
-          {console.log("About to print product before passing to Display Product")}
-          {console.log(product)}
-        <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>
-        </div>
-    })}
-
-
-    
-</div>
-</div>   
-</InfiniteScroll>
-</div> */}
-
-<div className="container">
-    {console.log("About to print products received by Product.jsx")}
-    {console.log(products)}
-
-    <div className="row" style={{marginTop:'20px', width:'1500px'}}>
-        {loading ? <Spinner/> : Click && products.length === 0 ? <h3 className="text-center my-3">No Products to Display</h3> : products.map((product) => {
+    <div className="row" >
+        {loading ? <Spinner/> : Click && products.length === 0 ? <h3 className="text-center my-3"><b>No Products to Display</b></h3> : products.map((product) => {
             return (
-                <div className="my-2">
+                <div style={{marginTop:"100px"}}>
                     {console.log("About to print product before passing to Display Product")}
                     {console.log(product)}
                     <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>

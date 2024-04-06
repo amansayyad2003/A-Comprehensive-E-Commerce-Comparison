@@ -102,10 +102,12 @@ export default function Display_product(props) {
         <img src={props.product.image_url} alt={props.product.title} />
       </div>
       <div className="info-container" style={{ marginLeft: "20px" }}>
-        <h5 className="card-title">{props.product.title}</h5>
-        <p style={{ fontSize: "1.2em" }}>₹{props.product.price}</p>
+        <div className="card-title"><h3>{props.product.title}</h3> </div>
+        <p style={{ fontSize: "1.2em", marginTop: "15px" }}>
+        <h3> ₹{props.product.price}</h3>
+      </p>
         {/* <p className="card-text">{props.product.description}</p> */}
-        <p>
+        <p style={{marginTop:"30px" }}>
           <Link
             to="/product-comparison"
             className="btn btn-primary"
@@ -114,13 +116,13 @@ export default function Display_product(props) {
               setTitle(props.product.title);
               fetchData(JSON.stringify(props.product));
             }}
-          >
+          > 
             View Product Comparison
           </Link>
         </p>
         <div>
           {/* <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div> */}
-          <div
+          <div  style={{marginTop:"20px" }}
             className="btn btn-primary"
             onClick={
               props.cart_action === "Add to Cart"

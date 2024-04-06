@@ -29,13 +29,11 @@ export default function Display_User_Name() {
 
 
   return (
-    <div>
-
-<h1>
-Hello, {username} <br />
- How can I help you today?
-</h1>
-      
+    <div className='display-username' style={{textAlign: 'center',    marginTop: '-163px'}}>
+      <h1>
+        Hello, {username} <br />
+        How can I help you today?
+      </h1>
     </div>
   )
 }

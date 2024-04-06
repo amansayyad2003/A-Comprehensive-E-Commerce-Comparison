@@ -1,45 +1,43 @@
-import React, { useContext, useEffect, useState } from 'react'
-import CartContext from '../../context/cart/Cartcontext'
-import Display_product from './Display_Product'
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import CartContext from '../../context/cart/Cartcontext';
+import Display_Product from './Display_Product';
+import { useNavigate } from 'react-router-dom';
+
 export default function Display_Cart(props) {
-  const context = useContext(CartContext)
-  const { fetch_cart,cart } = context
+  const context = useContext(CartContext);
+  const { fetch_cart, cart } = context;
   const navigate = useNavigate();
 
-  useEffect(()=>{
-
-    if (localStorage.getItem("authtoken"))  fetch_cart();
-
-    else{
-
-      props.showAlert("You have to Login to View Your Cart!","danger")
-
-      navigate("/login")
+  useEffect(() => {
+    if (localStorage.getItem('authtoken')) fetch_cart();
+    else {
+      props.showAlert('You have to Login to View Your Cart!', 'danger');
+      navigate('/login');
     }
-
-   
-  },[])
+  }, []);
 
   return (
-    <div>
-      {cart.length > 0 && <h1 className="text-center my-2">Your Cart</h1>}
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-10"> {/* Set width for "Your Cart" heading */}
+          <h1 className="text-center mb-5"><b>Your Cart</b></h1>
+        </div>
+      </div>
 
-      <div className="row" style={{ marginTop: '20px' }}>
+      {/* Add significant distance */}
+      <div style={{ marginBottom: '50px' }}></div>
+
+      <div className="row justify-content-center">
         {cart.length === 0 ? (
-          <h3 className="text-center my-3">Your Cart is Empty</h3>
+          <h3 className="text-center my-3"><b>Your Cart is Empty</b></h3>
         ) : (
-          cart.map((product) => {
-            console.log("Printing product inside cart")
-            console.log(product)
-            return (
-              <div className="col-md-4 my-2" key={product.id}>
-                <Display_product product={product} cart_action={"Delete from Cart"} showAlert={props.showAlert}/>
-              </div>
-            )
-          })
+          cart.map((product) => (
+            <div className="col-md-12 my-2" key={product.id}> {/* Set full width for each product */}
+              <Display_Product product={product} cart_action={'Delete from Cart'} showAlert={props.showAlert} />
+            </div>
+          ))
         )}
       </div>
     </div>
-  )
+  );
 }
