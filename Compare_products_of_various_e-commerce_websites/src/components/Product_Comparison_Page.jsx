@@ -10,6 +10,7 @@ import loadingcontext from "../../context/Spinner/Loadingcontext";
 import Spinner from "./Spinner";
 
 function Product_Comparison_Page(props) {
+  
   const loading_context = useContext(loadingcontext);
   const { loading } = loading_context;
   const context1 = useContext(similarproductContext);
@@ -17,6 +18,9 @@ function Product_Comparison_Page(props) {
 
   const image_url_context = useContext(Imagecontext);
   const { Image_url, Title } = image_url_context;
+
+  {console.log("About to print product inside Product Comparison Page")}
+  {console.log(similar_products)} 
 
   return (
     <>
@@ -34,7 +38,7 @@ function Product_Comparison_Page(props) {
             <thead>
               <tr>
                 <th>Sold by</th>
-                <th>Details &amp; special offers</th>
+                <th>Rating</th>
                 <th>Item price</th>
                 <th colSpan="2">Total price</th>
               </tr>
@@ -43,7 +47,14 @@ function Product_Comparison_Page(props) {
               {similar_products.map((product) => (
                 <tr key={product.id}>
                   <td>{`${product.website_name}`}</td>
-                  <td>{"Free delivery by Sat, 13 Apr"}</td>
+                  <td>
+                  {
+
+                  Array.from({ length: 5 }, (_, index) => (
+                    <span key={index}>{ index < product.rating ? "★" : "☆" }</span>
+                  ))
+                }
+                  </td>
                   <td>{`₹${product.price}`}</td>
                   <td>{`₹${product.price}`}</td>
                   <td>
