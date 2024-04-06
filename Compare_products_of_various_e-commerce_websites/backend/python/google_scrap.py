@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import re
+import sys
 
 urls = []
 
@@ -232,24 +233,45 @@ def get_product_details_all_website(product):
     query = product["title"] 
     # print(query)
     for i in website_names:
-        i = i + query
-        get_google_search_url(i)
-        for i in urls:
-            croma_product_details = extract_product_details_croma(i)
-            if croma_product_details is not None:
-                croma_product_details["website_url"] = i
-                break
-        flipkart_product_details = extract_product_details_flipkart(product["website_url"])
-        flipkart_product_details["website_url"] = str(product["website_url"])
-        # print(croma_product_details)
-        # print(flipkart_product_details)
-        product_details = [flipkart_product_details, croma_product_details]
-        # print(product_details)
-        return product_details
+        try:
+            i = i + query
+            get_google_search_url(i)
+            for i in urls:
+                croma_product_details = extract_product_details_croma(i)
+                if croma_product_details is not None:
+                    croma_product_details["website_url"] = i
+                    break
+            flipkart_product_details = extract_product_details_flipkart(product["website_url"])
+
+
+            flipkart_product_details["website_url"] = str(product["website_url"])
+
+            # print(croma_product_details)
+            # print(flipkart_product_details)
+            product_details = [flipkart_product_details, croma_product_details]
+            # print(product_details)
+            return product_details
+        except:
+            continue
 
 # Example 
 product = {'title': 'FUJIFILM Instax Treasure Box Mini 11 Instant Camera', 'price': '₹6,499', 'imgage_url': 'https://rukminim2.flixcart.com/image/312/312/kp2y2kw0/instant-camera/3/z/r/treasure-box-mini-11-instax-mini-11-fujifilm-original-imag3efzmkzvretx.jpeg?q=70', 'website_url': 'https://www.flipkart.com/fujifilm-instax-treasure-box-mini-11-instant-camera/p/itme77e0804bcc36?pid=INAG37FNY2WHY9XG&lid=LSTINAG37FNY2WHY9XGLEXRCE&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=f844a016-6a36-44ae-b34b-651b98c02329.INAG37FNY2WHY9XG.SEARCH&ppt=None&ppn=None&ssid=u74fs3w0og0000001712161085303&qH=dd6d2dcc679d12b9'}
 
-print(get_product_details_all_website(product))
+if __name__ == "__main__":
+    # product_details = get_all_product("Smartphone") # list
+    product_str =sys.argv[1]
+    # print(a)
+    
+    # Convert the string to a dictionary
+    product = json.loads(product_str)
+    product_details = get_product_details_all_website(product) # list
+
+
+    
+        
+
+    print((product_details),end="")
+    
+# print(get_product_details_all_website(product))
 
     

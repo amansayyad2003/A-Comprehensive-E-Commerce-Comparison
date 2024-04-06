@@ -112,7 +112,7 @@ export default function Product(props) {
       {console.log("About to print products eceived by Product.jsx")}
       {console.log(products)}
 
-    <div className="row" style={{marginTop:'20px',width:'500px' }}>
+    <div className="row" style={{marginTop:'20px',width:'1500px' }}>
       {loading?"":Input.length !== 0 && products.length===0?<h3 className="text-center my-3">No Products to Display</h3>: products.map((product)=>{
         return  <div className="my-2">
           {console.log("About to print product before passing to Display Product")}
