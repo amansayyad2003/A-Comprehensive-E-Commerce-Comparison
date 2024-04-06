@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Display_Cart from "./Display_Cart";
 import CartContext from "../../context/cart/Cartcontext";
-
+import Modecontext from '../../context/mode/Modecontext';
 import Product_Comparison_Page from "./Product_Comparison_Page";
 
 import Imagecontext from "../../context/product_image/Imagecontext";
@@ -13,6 +13,8 @@ export default function Display_product(props) {
   {console.log("INSIDE Display_product!!!")}
   {console.log("About to print product inside!!! Display_Product.jsx")}
   {console.log(props.product)}
+
+  const {mode,toggleMode}= useContext(Modecontext)
   
   const loading_context = useContext(loadingcontext)
   const {loading,setLoading} = loading_context
@@ -97,7 +99,7 @@ export default function Display_product(props) {
   };
 
   return (
-    <div className='product-container' style={{ display: 'flex', width: '1100px', height: '200px' }}>
+    <div className='product-container' style={{ display: 'flex', width: '1100px', height: '200px',color:mode==='dark'?'white':'black' }}>
       <div className='image-container' style={{ height: '100%', width: '30%' }}>
         <img src={props.product.image_url} alt={props.product.title} style={{ height: '100%', width: 'auto' }} />
       </div>

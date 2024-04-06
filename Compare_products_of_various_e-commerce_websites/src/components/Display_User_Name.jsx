@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Price_filter from './Price_filter';
+import Modecontext from '../../context/mode/Modecontext';
 export default function Display_User_Name(props) {
 
     const [username,setUserName] = useState('')
+
+    const {mode,toggleMode}= useContext(Modecontext)
 
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function Display_User_Name(props) {
 
 
   return (
-    <div className='display-username-container' style={{ textAlign: 'center', marginTop: '-163px'}}>
+    <div className='display-username-container' style={{ textAlign: 'center', marginTop: '-163px',color:mode==='dark'?'white':'black'}}>
     <div>
       {/* style={{ marginRight: '10px' }} */}
       <h1 > 

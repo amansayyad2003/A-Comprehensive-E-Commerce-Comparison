@@ -7,6 +7,7 @@ import productContext from "../../context/products/Productcontext";
 import Product from "./Product";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
 import loadingcontext from "../../context/Spinner/Loadingcontext";
+import Modecontext from '../../context/mode/Modecontext';
 import Spinner from "./Spinner";
 
 function Product_Comparison_Page(props) {
@@ -18,13 +19,14 @@ function Product_Comparison_Page(props) {
 
   const image_url_context = useContext(Imagecontext);
   const { Image_url, Title } = image_url_context;
+  const {mode,toggleMode}= useContext(Modecontext)
 
   {console.log("About to print product inside Product Comparison Page")}
   {console.log(similar_products)} 
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center",color:mode==='dark'?'white':'black'}}>
         <h2 style={{ marginBottom: "40px" }}>{Title}</h2>
         <img
           src={Image_url}
