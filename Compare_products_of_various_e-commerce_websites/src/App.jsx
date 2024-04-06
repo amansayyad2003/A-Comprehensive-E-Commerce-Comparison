@@ -65,7 +65,7 @@ function App() {
                       element={
                         <>
                           <div className="search-bar-container">
-                            <Display_User_Name />
+                            <Display_User_Name  alert={alert} showAlert={showAlert}/>
                             <SearchBar
                               progress={progress}
                               setProgress={setProgress}
