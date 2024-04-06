@@ -23,33 +23,38 @@ export default function SearchBar(props) {
     setProducts([...products, ...newProducts]);
   };
 
-  const fetchData = async (value, check) => {
+  const fetchData = async (value) => {
     try {
       console.log("Inside fetchData")
       console.log("Printing value....")
       console.log(value)
       props.setProgress(20);
 
+      props.setProgress(40);
+
       const url = `http://localhost:3000/api/python?searchTerm=${encodeURIComponent(
         value
       )}`;
 
-      props.setProgress(50);
+      props.setProgress(60);
+      
 
       const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        // Convert search term to JSON and send it as the query parameter
+       
       });
+
+      props.setProgress(80);
 
       if (!response.ok) {
         throw new Error("Failed to execute Python script");
       }
 
       const result = await response.json();
-      props.setProgress(70);
+      props.setProgress(100);
       console.log("Result from backend:", result["result"]);
       
       const dead = result["result"];
@@ -68,8 +73,6 @@ export default function SearchBar(props) {
       setProducts(list);
 
       setLoading(false)
-
-      props.setProgress(100);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -87,17 +90,27 @@ export default function SearchBar(props) {
     // fetchData(value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      setClick(true)
+    setLoading(true)
+      fetchData(Input);
+    }
+  };
+
+
+
   return (
     <div className="input-wrapper">
      
       <input
         placeholder="What are you looking for..."
-        value={Input}
+        value={Input} onKeyDown={handleKeyDown}
         onChange={(e) => handleChange(e.target.value, 0)}
       />
        <FaSearch
-        id="search-icon"
-        onClick={(e) => handleClick(Input, 1)}
+        id="search-icon"  
+        onClick={(e) => handleClick(Input)}
       />
     </div>
   );
