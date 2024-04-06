@@ -89,14 +89,15 @@ export default function SearchBar(props) {
 
   return (
     <div className="input-wrapper">
-      <FaSearch
-        id="search-icon"
-        onClick={(e) => handleClick(Input, 1)}
-      />
+     
       <input
         placeholder="What are you looking for..."
         value={Input}
         onChange={(e) => handleChange(e.target.value, 0)}
+      />
+       <FaSearch
+        id="search-icon"
+        onClick={(e) => handleClick(Input, 1)}
       />
     </div>
   );
