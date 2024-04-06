@@ -8,14 +8,11 @@ import Product_Comparison_Page from "./Product_Comparison_Page";
 import Imagecontext from "../../context/product_image/Imagecontext";
 import productContext from "../../context/products/Productcontext";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
-
+import loadingcontext from '../../context/Spinner/Loadingcontext';
 export default function Display_product(props) {
-  {
-    console.log("Trying to print image of product inside Display_prdoduct");
-  }
-  {
-    console.log(props.product.image_url);
-  }
+  
+  const loading_context = useContext(loadingcontext)
+  const {loading,setLoading} = loading_context
 
   const [image, setImage] = useState("");
   const context = useContext(CartContext);
@@ -38,6 +35,7 @@ export default function Display_product(props) {
 
   const fetchData = async (product, check) => {
     try {
+      setLoading(true)
       console.log("Inside Fetch Data similar product");
       // props.setProgress(20)
 
@@ -83,6 +81,11 @@ export default function Display_product(props) {
       //   console.log("Printing type of list:", typeof list);
 
       setSimilarProducts(list);
+
+      setLoading(false)
+
+
+     
 
       //   props.setProgress(100)
     } catch (error) {
