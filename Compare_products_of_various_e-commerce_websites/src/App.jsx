@@ -18,7 +18,8 @@ import Inputstate from "../context/searchBar/Inputstate";
 import Imagestate from "../context/product_image/Imagestate";
 import Display_User_Name from "./components/Display_User_Name";
 import Similarproductstate from "../context/SimilarProductContext/Similarproductstate";
-
+import Loadingstate from "../context/Spinner/Loadingstate";
+import Clickstate from "../context/click/Clickstate";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [progress, setProgress] = useState(0);
@@ -38,6 +39,8 @@ function App() {
   return (
     <>
       {/* so that all states in product state can be accsessed by all the components wrapped inside it */}
+      <Clickstate>
+      <Loadingstate>
       <Similarproductstate>
         <Imagestate>
           <Inputstate>
@@ -118,6 +121,8 @@ function App() {
           </Inputstate>
         </Imagestate>
       </Similarproductstate>
+      </Loadingstate>
+      </Clickstate>
     </>
   );
 }
