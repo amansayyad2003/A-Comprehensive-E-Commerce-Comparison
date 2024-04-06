@@ -112,7 +112,9 @@ function App() {
                     <Route
                       exact
                       path="/product-comparison"
-                      element={<Product_Comparison_Page />}
+                      element={
+                        <Product_Comparison_Page cart_action={"Add to Cart"} />
+                      }
                     ></Route>
                   </Routes>
                 </Router>

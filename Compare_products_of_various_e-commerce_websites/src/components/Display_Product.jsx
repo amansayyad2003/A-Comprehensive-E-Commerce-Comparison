@@ -70,17 +70,23 @@ export default function Display_product(props) {
       //     console.log("Printing type of dead:", typeof dead);
       //   console.log("Original JSON string:", dead);
 
-      const cleanedStr = dead.replace(/'/g, '"').replace(/,\s+/g, ",");
+      // console.log(result);
+      const cleanedStr = dead
+        .replace(/'/g, '"')
+        .replace(/,\s+/g, ",")
+        .replace("None", "null");
+      // cleanedStr = result;
       //     console.log("Cleaned JSON string:", cleanedStr);
 
       console.log(cleanedStr);
+      const dictionary = JSON.parse(cleanedStr);
       const list = JSON.parse(cleanedStr);
 
-      console.log("Parsed JSON data:", list);
+      console.log("Parsed JSON data:", dictionary);
 
       //   console.log("Printing type of list:", typeof list);
 
-      setSimilarProducts(list);
+      setSimilarProducts(dictionary);
 
       setLoading(false)
 
