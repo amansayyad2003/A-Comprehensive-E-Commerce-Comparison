@@ -240,11 +240,13 @@ def get_product_details_all_website(product):
                 croma_product_details = extract_product_details_croma(i)
                 if croma_product_details is not None:
                     croma_product_details["website_url"] = i
+                    croma_product_details["website_name"] = "Croma"
                     break
             flipkart_product_details = extract_product_details_flipkart(product["website_url"])
 
 
             flipkart_product_details["website_url"] = str(product["website_url"])
+            flipkart_product_details["website_name"] = "Flipkart"
 
             # print(croma_product_details)
             # print(flipkart_product_details)

@@ -42,12 +42,12 @@ function Product_Comparison_Page(props) {
               similar_products.map((product) => {
                 return (
                   <tr>
-                    <td>Flipkart</td>
+                    <td>{product.website_name}</td>
                     <td>Free delivery by Sat, 13 Apr</td>
-                    <td>₹323</td>
-                    <td>₹4342</td>
+                    <td>₹{product.price}</td>
+                    <td>₹{product.price}</td>
                     <td>
-                      <Link to="http://www.google.com">Visit Site</Link>
+                      <Link to={product.website_url}>Visit Site</Link>
                     </td>
                   </tr>
                   // <div className="my-2">

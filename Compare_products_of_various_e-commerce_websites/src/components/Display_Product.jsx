@@ -75,9 +75,10 @@ export default function Display_product(props) {
       const cleanedStr = dead.replace(/'/g, '"').replace(/,\s+/g, ",");
       //     console.log("Cleaned JSON string:", cleanedStr);
 
+      console.log(cleanedStr);
       const list = JSON.parse(cleanedStr);
 
-      //   console.log("Parsed JSON data:", list);
+      console.log("Parsed JSON data:", list);
 
       //   console.log("Printing type of list:", typeof list);
 
