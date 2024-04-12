@@ -81,11 +81,17 @@ def similar_top_result_flipkart(product):
 
     final_titles = []
     for i in range(10):
-        final_titles.append(sorted_documents[i])
+        try:
+            final_titles.append(sorted_documents[i])
+        except:
+            continue
 
     final_product = []
     for i in final_titles:
-        final_product.append(list_products[list_index[i]])
+        try:
+            final_product.append(list_products[list_index[i]])
+        except:
+            continue
     return final_product
 
 

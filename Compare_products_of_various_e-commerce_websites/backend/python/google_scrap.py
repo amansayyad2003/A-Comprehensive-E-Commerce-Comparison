@@ -5,6 +5,7 @@ import requests
 import json
 import re
 import sys
+import similar_products as sp
 
 urls = []
 
@@ -266,12 +267,13 @@ if __name__ == "__main__":
     
     # Convert the string to a dictionary
     product = json.loads(product_str)
-    product_details = get_product_details_all_website(product) # list
+    # product_details = get_product_details_all_website(product) # list
+    product_details = {}
+    # similar_products = sp.similar_top_result_flipkart(product)
+    product_details["same_product"] = get_product_details_all_website(product)
+    product_details["similar_product"] = sp.similar_top_result_flipkart(product)
 
-
-    
-        
-
+    product_details = [product_details]
     print((product_details),end="")
     
 # print(get_product_details_all_website(product))

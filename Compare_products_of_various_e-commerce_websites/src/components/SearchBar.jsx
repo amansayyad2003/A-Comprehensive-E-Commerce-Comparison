@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
-import "./SearchBar.css";
+import "./searchBar.css";
 import { json } from "react-router-dom";
 import productContext from "../../context/products/Productcontext";
 import LoadingBar from "react-top-loading-bar";
@@ -10,14 +10,13 @@ import loadingcontext from "../../context/Spinner/Loadingcontext";
 import Clickcontext from "../../context/click/Clickcontext";
 export default function SearchBar(props) {
   // const [input, setInput] = useState("");
-  const loading_context = useContext(loadingcontext)
-  const click_context = useContext(Clickcontext)
-  const {Click,setClick} = click_context
-  const {loading,setLoading} = loading_context
+  const loading_context = useContext(loadingcontext);
+  const click_context = useContext(Clickcontext);
+  const { Click, setClick } = click_context;
+  const { loading, setLoading } = loading_context;
   const context = useContext(productContext);
   const { products, setProducts } = context;
   const { Input, setInput } = useContext(Inputcontext);
-  
 
   const addNewProducts = (newProducts) => {
     setProducts([...products, ...newProducts]);
@@ -25,9 +24,9 @@ export default function SearchBar(props) {
 
   const fetchData = async (value) => {
     try {
-      console.log("Inside fetchData")
-      console.log("Printing value....")
-      console.log(value)
+      console.log("Inside fetchData");
+      console.log("Printing value....");
+      console.log(value);
       props.setProgress(20);
 
       props.setProgress(40);
@@ -56,7 +55,7 @@ export default function SearchBar(props) {
       const result = await response.json();
       props.setProgress(100);
       console.log("Result from backend:", result["result"]);
-      
+
       const dead = result["result"];
       console.log("Printing type of dead:", typeof dead);
       console.log("Original JSON string:", dead);
@@ -72,7 +71,9 @@ export default function SearchBar(props) {
 
       setProducts(list);
 
-      setLoading(false)
+      setLoading(false);
+
+      props.setProgress(100);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -80,9 +81,9 @@ export default function SearchBar(props) {
 
   const handleClick = (value) => {
     // setInput(value);
-    setClick(true)
-    setLoading(true)
-      fetchData(value);
+    setClick(true);
+    setLoading(true);
+    fetchData(value);
   };
 
   const handleChange = (value) => {
@@ -102,7 +103,6 @@ export default function SearchBar(props) {
 
   return (
     <div className="input-wrapper">
-     
       <input
         placeholder="What are you looking for..."
         value={Input} onKeyDown={handleKeyDown}
