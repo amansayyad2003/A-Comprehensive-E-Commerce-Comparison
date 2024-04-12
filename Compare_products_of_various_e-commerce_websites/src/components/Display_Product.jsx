@@ -8,11 +8,10 @@ import Product_Comparison_Page from "./Product_Comparison_Page";
 import Imagecontext from "../../context/product_image/Imagecontext";
 import productContext from "../../context/products/Productcontext";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
-import loadingcontext from '../../context/Spinner/Loadingcontext';
+import loadingcontext from "../../context/Spinner/Loadingcontext";
 export default function Display_product(props) {
-  
-  const loading_context = useContext(loadingcontext)
-  const {loading,setLoading} = loading_context
+  const loading_context = useContext(loadingcontext);
+  const { loading, setLoading } = loading_context;
 
   const [image, setImage] = useState("");
   const context = useContext(CartContext);
@@ -35,7 +34,7 @@ export default function Display_product(props) {
 
   const fetchData = async (product, check) => {
     try {
-      setLoading(true)
+      setLoading(true);
       console.log("Inside Fetch Data similar product");
       // props.setProgress(20)
 
@@ -66,21 +65,22 @@ export default function Display_product(props) {
       // props.setProgress(70)
       console.log("Result from backend:", result["result"]);
 
-      const dead = result["result"];
+      const dead = result["result"]
       //     console.log("Printing type of dead:", typeof dead);
       //   console.log("Original JSON string:", dead);
 
-      // console.log(result);
+      console.log(dead);
       const cleanedStr = dead
         .replace(/'/g, '"')
         .replace(/,\s+/g, ",")
-        .replace("None", "null");
+        .replace("None", "null")
+        .replace(/\\xa0/g, " ");
       // cleanedStr = result;
-      //     console.log("Cleaned JSON string:", cleanedStr);
+          console.log("Cleaned JSON string:", cleanedStr);
 
       console.log(cleanedStr);
       const dictionary = JSON.parse(cleanedStr);
-      const list = JSON.parse(cleanedStr);
+      // const list = JSON.parse(cleanedStr);
 
       console.log("Parsed JSON data:", dictionary);
 
@@ -88,10 +88,7 @@ export default function Display_product(props) {
 
       setSimilarProducts(dictionary);
 
-      setLoading(false)
-
-
-     
+      setLoading(false);
 
       //   props.setProgress(100)
     } catch (error) {
@@ -108,12 +105,14 @@ export default function Display_product(props) {
         <img src={props.product.image_url} alt={props.product.title} />
       </div>
       <div className="info-container" style={{ marginLeft: "20px" }}>
-        <div className="card-title"><h3>{props.product.title}</h3> </div>
+        <div className="card-title">
+          <h3>{props.product.title}</h3>{" "}
+        </div>
         <p style={{ fontSize: "1.2em", marginTop: "15px" }}>
-        <h3> ₹{props.product.price}</h3>
-      </p>
+          <h3> ₹{props.product.price}</h3>
+        </p>
         {/* <p className="card-text">{props.product.description}</p> */}
-        <p style={{marginTop:"30px" }}>
+        <p style={{ marginTop: "30px" }}>
           <Link
             to="/product-comparison"
             className="btn btn-primary"
@@ -122,13 +121,14 @@ export default function Display_product(props) {
               setTitle(props.product.title);
               fetchData(JSON.stringify(props.product));
             }}
-          > 
+          >
             View Product Comparison
           </Link>
         </p>
         <div>
           {/* <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div> */}
-          <div  style={{marginTop:"20px" }}
+          <div
+            style={{ marginTop: "20px" }}
             className="btn btn-primary"
             onClick={
               props.cart_action === "Add to Cart"

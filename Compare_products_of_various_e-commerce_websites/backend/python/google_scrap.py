@@ -67,6 +67,8 @@ def extract_product_details_croma(url):
 
         # print(soup)
         scripts = soup.find_all('script', type='application/ld+json')
+        website_name = "Croma"
+        website_url = url
         # Iterate through <script> tags
         # print(scripts)
         for script in scripts:
@@ -85,7 +87,7 @@ def extract_product_details_croma(url):
                     review_count = script_data['review']['reviewCount']
                     brand_name = script_data['brand']['name']
                     rating_value = (int(script_data['review']['reviewRating']['bestRating']) + int(script_data['review']['reviewRating']['worstRating']))/2
-                    product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
+                    product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name, "website_name": website_name, "website_url":website_url}
                     return product_details
             except json.JSONDecodeError:
                 # Handle JSON decoding errors (truncated data)
@@ -109,7 +111,7 @@ def extract_product_details_croma(url):
                             # review_count = script_data['review']['reviewCount']
                             brand_name = script_data['brand']['name']
                             rating_value = (int(script_data['review']['reviewRating']['bestRating']) + int(script_data['review']['reviewRating']['worstRating']))/2
-                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
+                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name, "website_name": website_name, "website_url":website_url}
                             return product_details
                             # return script_data
                     except json.JSONDecodeError:
@@ -139,7 +141,7 @@ def extract_product_details_croma(url):
                             rating_value = (int(script_contents['review']['reviewRating']['bestRating']) + int(script_contents['review']['reviewRating']['worstRating']))/2
                             # review_count = script_contents['review']['reviewCount']
                             brand_name = script_contents['brand']['name']
-                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name}
+                            product_details = {'name': name, 'price': price, 'image': image, 'rating': rating_value, "brand_name": brand_name, "website_name": website_name, "website_url":website_url}
                             return product_details
                             # return script_data
                         # print("Failed to recover from truncated data.")
@@ -160,9 +162,21 @@ def extract_product_details_flipkart(url):
 
     response = requests.get(url, headers=headers)
     # print(response)
+    product_details = []
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
+
+        title = soup.find('span', class_='B_NuCI').text
+        price = soup.find('div', {'class': ['_30jeq3', '_16Jk6d']}).text.replace('₹', '').replace(',', '')
+        image = soup.find('img', {'class': ['_396cs4', '_2amPTt', '_3qGmMb']}).get('src')
+        rating_value = soup.find('div', {'class': ['_3LWZlK', '_1D-8OL']}).text
+        website_name = "Flipkart"
+        product_details = {'name': title, 'price': price, 'image': image, 'rating': rating_value, "website_name":website_name, "website_url": url}
+        return product_details
+    else:
+        return product_details
         scripts = soup.find_all('script', type='application/ld+json')
+        
         # Iterate through <script> tags
         # print(scripts)
         for script in scripts:
@@ -233,34 +247,41 @@ def get_product_details_all_website(product):
     website_names = ['croma']
     query = product["title"] 
     # print(query)
+    product_details = []
     for i in website_names:
-        try:
-            i = i + query
-            get_google_search_url(i)
-            for i in urls:
-                croma_product_details = extract_product_details_croma(i)
-                if croma_product_details is not None:
-                    croma_product_details["website_url"] = i
-                    croma_product_details["website_name"] = "Croma"
-                    break
-            flipkart_product_details = extract_product_details_flipkart(product["website_url"])
+        # try:
+        i = i + query
+        get_google_search_url(i)
+        for j in urls:
+            croma_product_details = extract_product_details_croma(j)
+            if croma_product_details is not None:
+                # croma_product_details["website_url"] = i
+                # croma_product_details["website_name"] = "Croma"
+                break
+        flipkart_product_details = extract_product_details_flipkart(product["website_url"])
 
-
-            flipkart_product_details["website_url"] = str(product["website_url"])
-            flipkart_product_details["website_name"] = "Flipkart"
-
-            # print(croma_product_details)
-            # print(flipkart_product_details)
+        # print(flipkart_product_details)
+        if(flipkart_product_details is None or croma_product_details is None):
+            if(flipkart_product_details is not None and croma_product_details is None):
+                product_details = [flipkart_product_details]
+            elif(flipkart_product_details is None and croma_product_details is not None):
+                product_details = [croma_product_details]
+        else:
+            # flipkart_product_details["website_url"] = str(product["website_url"])
+            # flipkart_product_details["website_name"] = "Flipkart"
             product_details = [flipkart_product_details, croma_product_details]
-            # print(product_details)
-            return product_details
-        except:
-            continue
+        # print(croma_product_details)
+        # print(flipkart_product_details)
+        
+        # print(product_details)
+        return product_details
+        # except:
+        #     continue
 
 # Example 
-product = {'title': 'FUJIFILM Instax Treasure Box Mini 11 Instant Camera', 'price': '₹6,499', 'imgage_url': 'https://rukminim2.flixcart.com/image/312/312/kp2y2kw0/instant-camera/3/z/r/treasure-box-mini-11-instax-mini-11-fujifilm-original-imag3efzmkzvretx.jpeg?q=70', 'website_url': 'https://www.flipkart.com/fujifilm-instax-treasure-box-mini-11-instant-camera/p/itme77e0804bcc36?pid=INAG37FNY2WHY9XG&lid=LSTINAG37FNY2WHY9XGLEXRCE&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=f844a016-6a36-44ae-b34b-651b98c02329.INAG37FNY2WHY9XG.SEARCH&ppt=None&ppn=None&ssid=u74fs3w0og0000001712161085303&qH=dd6d2dcc679d12b9'}
+product = {"title":"Canon EOS 200D II DSLR Camera EF-S18-55mm IS STM","price":"55990","image_url":"https://rukminim2.flixcart.com/image/312/312/juwzf680/dslr-camera/g/a/q/200d-ii-200d-ii-canon-original-imaffvrhzyqzayys.jpeg?q=70","website_url":"https://www.flipkart.com/canon-eos-200d-ii-dslr-camera-ef-s18-55mm-stm/p/itm5d6e44f7fd976?pid=DLLFFNVDYGQN9XCS&lid=LSTDLLFFNVDYGQN9XCSS1NNIP&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=63c6814b-f0d5-4f1d-8eb2-db618959f425.DLLFFNVDYGQN9XCS.SEARCH&ppt=None&ppn=None&ssid=8i9b5u2ugw0000001712455667549&qH=dd6d2dcc679d12b9"}
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     # product_details = get_all_product("Smartphone") # list
     product_str =sys.argv[1]
     # print(a)
@@ -270,8 +291,13 @@ if __name__ == "__main__":
     # product_details = get_product_details_all_website(product) # list
     product_details = {}
     # similar_products = sp.similar_top_result_flipkart(product)
-    product_details["same_product"] = get_product_details_all_website(product)
-    product_details["similar_product"] = sp.similar_top_result_flipkart(product)
+    pd_same_prod = get_product_details_all_website(product)
+    # print(pd_same_prod)
+    if(pd_same_prod is None):   
+        pd_same_prod = []
+    else:
+        product_details["same_product"] = pd_same_prod
+    product_details["similar_products"] = sp.similar_top_result_flipkart(product)
 
     product_details = [product_details]
     print((product_details),end="")

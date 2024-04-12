@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 export default function Display_User_Name() {
-
-    const [username,setUserName] = useState('')
-
+  const [username, setUserName] = useState("");
 
   useEffect(() => {
     const get_user = async () => {
@@ -13,12 +11,12 @@ export default function Display_User_Name() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "authtoken": localStorage.getItem("authtoken")
+            authtoken: localStorage.getItem("authtoken"),
           },
         });
         const json = await response.json();
         console.log(json.user.name);
-        setUserName(json.user.name)
+        setUserName(json.user.name);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -27,13 +25,15 @@ export default function Display_User_Name() {
     get_user();
   }, []);
 
-
   return (
-    <div className='display-username' style={{textAlign: 'center',    marginTop: '-163px'}}>
+    <div
+      className="display-username"
+      style={{ textAlign: "center", marginTop: "-163px" }}
+    >
       <h1>
-        Hello, {username} <br />
+        Hello, {username ? username : "Welcome to Compare Craft"} <br />
         How can I help you today?
       </h1>
     </div>
-  )
+  );
 }

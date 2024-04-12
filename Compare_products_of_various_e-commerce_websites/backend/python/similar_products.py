@@ -55,10 +55,25 @@ def similar_top_result_flipkart(product):
     index = 0
     for i in list_products:
         tit = i['title']
-        corpus.append(tit)
+
+        if (tit in list_index.keys()):
+            continue
         list_index[tit] = index
         index = index + 1
+        if tit == corpus[0]:
+            continue
+        corpus.append(tit)
 
+    # print("List Products: ")
+    # for i in list_products:
+    #     print(i)
+    # print("\nCorpus: ")
+    # for i in corpus:
+    #     print(i)
+    # print("\nList Index: ")
+    # for i in list_index:
+    #     print(i)
+    
     tfidf = TfidfVectorizer(stop_words="english")
 
     result = tfidf.fit_transform(corpus)
@@ -77,19 +92,35 @@ def similar_top_result_flipkart(product):
 
     # print(corpus)
     # Sort the documents according to their similarity to the 0th document
-    sorted_documents = [corpus[i] for i in sorted_indices]
+    # sorted_documents = [corpus[i] for i in sorted_indices]
 
     final_titles = []
-    for i in range(10):
-        final_titles.append(sorted_documents[i])
+    count = 0
+    index = 0
+    while index < 10:
+        try:
+            if (similarity_scores[sorted_indices[index]] == 1):
+                index = index + 1
+                continue
+            else:
+                final_titles.append(sorted_documents[count])
+                count = count + 1
+                index = index + 1
+        except:
+            index = index + 1
+            continue
 
     final_product = []
     for i in final_titles:
-        final_product.append(list_products[list_index[i]])
+        try:
+            final_product.append(list_products[list_index[i]])
+        except:
+            continue
     return final_product
 
 
-product = {'title': 'FUJIFILM Instax Treasure Box Mini 11 Instant Camera', 'price': '₹6,499', 'imgage_url': 'https://rukminim2.flixcart.com/image/312/312/kp2y2kw0/instant-camera/3/z/r/treasure-box-mini-11-instax-mini-11-fujifilm-original-imag3efzmkzvretx.jpeg?q=70', 'website_url': 'https://www.flipkart.com/fujifilm-instax-treasure-box-mini-11-instant-camera/p/itme77e0804bcc36?pid=INAG37FNY2WHY9XG&lid=LSTINAG37FNY2WHY9XGLEXRCE&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=f844a016-6a36-44ae-b34b-651b98c02329.INAG37FNY2WHY9XG.SEARCH&ppt=None&ppn=None&ssid=u74fs3w0og0000001712161085303&qH=dd6d2dcc679d12b9'}
+product = {"title":"Canon EOS 200D II DSLR Camera EF-S18-55mm IS STM","price":"55990","image_url":"https://rukminim2.flixcart.com/image/312/312/juwzf680/dslr-camera/g/a/q/200d-ii-200d-ii-canon-original-imaffvrhzyqzayys.jpeg?q=70","website_url":"https://www.flipkart.com/canon-eos-200d-ii-dslr-camera-ef-s18-55mm-stm/p/itm5d6e44f7fd976?pid=DLLFFNVDYGQN9XCS&lid=LSTDLLFFNVDYGQN9XCSS1NNIP&marketplace=FLIPKART&q=camera&store=jek%2Fp31&srno=s_1_1&otracker=search&fm=organic&iid=63c6814b-f0d5-4f1d-8eb2-db618959f425.DLLFFNVDYGQN9XCS.SEARCH&ppt=None&ppn=None&ssid=8i9b5u2ugw0000001712455667549&qH=dd6d2dcc679d12b9"}
+
 
 # print(product['title'])
 # var  = similar_top_result_flipkart(product)

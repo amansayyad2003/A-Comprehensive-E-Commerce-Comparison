@@ -69,8 +69,4 @@ if __name__ == "__main__":
     # print(a)
     product_details = get_all_product(a) # list
 
-
-    
-        
-
     print((product_details),end="")
