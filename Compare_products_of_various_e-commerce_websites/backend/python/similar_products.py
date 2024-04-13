@@ -108,6 +108,10 @@ def similar_top_result_flipkart(product):
                 index = index + 1
         except:
             index = index + 1
+    # for i in range(10):
+    #     try:
+    #         final_titles.append(sorted_documents[i])
+    #     except:
             continue
 
     final_product = []

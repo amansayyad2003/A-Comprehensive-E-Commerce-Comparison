@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Display_Cart from "./Display_Cart";
 import CartContext from "../../context/cart/Cartcontext";
-
+import Modecontext from '../../context/mode/Modecontext';
 import Product_Comparison_Page from "./Product_Comparison_Page";
 
 import Imagecontext from "../../context/product_image/Imagecontext";
@@ -10,8 +10,15 @@ import productContext from "../../context/products/Productcontext";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
 import loadingcontext from "../../context/Spinner/Loadingcontext";
 export default function Display_product(props) {
-  const loading_context = useContext(loadingcontext);
-  const { loading, setLoading } = loading_context;
+
+  {console.log("INSIDE Display_product!!!")}
+  {console.log("About to print product inside!!! Display_Product.jsx")}
+  {console.log(props.product)}
+
+  const {mode,toggleMode}= useContext(Modecontext)
+  
+  const loading_context = useContext(loadingcontext)
+  const {loading,setLoading} = loading_context
 
   const [image, setImage] = useState("");
   const context = useContext(CartContext);
@@ -81,6 +88,18 @@ export default function Display_product(props) {
       console.log(cleanedStr);
       const dictionary = JSON.parse(cleanedStr);
       // const list = JSON.parse(cleanedStr);
+// =======
+//       // console.log(result);
+//       const cleanedStr = dead
+//         .replace(/'/g, '"')
+//         .replace(/,\s+/g, ",")
+//         .replace("None", "null");
+//       // cleanedStr = result;
+//       //     console.log("Cleaned JSON string:", cleanedStr);
+// 
+//       console.log(cleanedStr);
+//       const dictionary = JSON.parse(cleanedStr);
+//       const list = JSON.parse(cleanedStr);
 
       console.log("Parsed JSON data:", dictionary);
 
@@ -97,7 +116,7 @@ export default function Display_product(props) {
   };
 
   return (
-    <div
+	      <div
       className="product-container"
       style={{ display: "flex", width: "1100px" }}
     >
@@ -149,3 +168,63 @@ export default function Display_product(props) {
     </div>
   );
 }
+//     <div className='product-container' style={{ display: 'flex', width: '1100px', height: '200px',color:mode==='dark'?'white':'black' }}>
+//       <div className='image-container' style={{ height: '100%', width: '30%' }}>
+//         <img src={props.product.image_url} alt={props.product.title} style={{ height: '100%', width: 'auto' }} />
+//       </div>
+// //       <div className="info-container" style={{ marginLeft: "20px" }}>
+// //         <div className="card-title">
+// //           <h3>{props.product.title}</h3>{" "}
+// //         </div>
+// //         <p style={{ fontSize: "1.2em", marginTop: "15px" }}>
+// //           <h3> ₹{props.product.price}</h3>
+// //         </p>
+// //         {/* <p className="card-text">{props.product.description}</p> */}
+// //         <p style={{ marginTop: "30px" }}>
+// // =======
+//       <div className='info-container' style={{ marginLeft: '20px', width: '70%' }}>
+//         <div className='card-title'><h3>{props.product.title}</h3></div>
+//         <p style={{ fontSize: '1.2em', marginTop: '15px' }}><h3> ₹{props.product.price}</h3></p>
+//         <p style={{ marginTop: '30px' }}>
+// 	  // someting
+//           <Link
+//             to='/product-comparison'
+//             className='btn btn-primary'
+//             onClick={() => {
+//               setImage_url(props.product.image_url);
+//               setTitle(props.product.title);
+//               fetchData(JSON.stringify(props.product));
+//             }}
+//           >
+//             View Product Comparison
+//           </Link>
+//         </p>
+// //         <div>
+// //           {/* <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div> */}
+// //           <div
+// //             style={{ marginTop: "20px" }}
+// //             className="btn btn-primary"
+// //             onClick={
+// //               props.cart_action === "Add to Cart"
+// //                 ? () => {
+// //                     addtoCart();
+// //                     setImage_url(props.product.image_url);
+// //                     setTitle(props.product.title);
+// //                   }
+// //                 : () => {
+// //                     deletefromCart(props.product._id);
+// //                   }
+// //             }
+// //           >
+// //             {props.cart_action}
+// //           </div>
+// // =======
+//         <div style={{ marginTop: '20px' }} className='btn btn-primary' onClick={props.cart_action === 'Add to Cart' ? () => { addtoCart(); setImage_url(props.product.image_url); setTitle(props.product.title); } : () => { deletefromCart(props.product._id); }}>
+//           {props.cart_action}
+// 	  // ssdlkf
+//         </div>
+//       </div>
+//     </div>
+//   );
+//   
+// }

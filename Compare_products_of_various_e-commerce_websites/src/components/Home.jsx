@@ -10,14 +10,13 @@ export default function Home(props) {
   
 
 
-
   return (
     <div className='container'>
 
 
     {/* <Sort_products/>     */}
 
-    {/* <Price_filter/> */}
+    <Price_filter alert={props.alert} showAlert={props.showAlert}/>
 
     <Product alert={props.alert} showAlert={props.showAlert}/>
 

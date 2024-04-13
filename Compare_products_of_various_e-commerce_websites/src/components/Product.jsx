@@ -102,17 +102,17 @@ export default function Product(props) {
 <div >
  
 
-    <div className="row" >
+    {/* <div className="row" >
         {loading ? <Spinner/> : Click && products.length === 0 ? <h3 className="text-center my-3"><b>No Products to Display</b></h3> : products.map((product) => {
-            return (
-                <div style={{marginTop:"100px"}}>
-                    {console.log("About to print product before passing to Display Product")}
-                    {console.log(product)}
-                    <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>
-                </div>
-            );
+            // return (
+            //     <div style={{marginTop:"100px"}}>
+            //         {console.log("About to print product before passing to Display Product")}
+            //         {console.log(product)}
+            //         <Display_Product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/>
+            //     </div>
+            // );
         })}
-    </div>
+    </div> */}
 </div>
 
 

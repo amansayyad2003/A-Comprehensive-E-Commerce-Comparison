@@ -20,6 +20,7 @@ import Display_User_Name from "./components/Display_User_Name";
 import Similarproductstate from "../context/SimilarProductContext/Similarproductstate";
 import Loadingstate from "../context/Spinner/Loadingstate";
 import Clickstate from "../context/click/Clickstate";
+import Modestate from "../context/mode/Modestate";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [progress, setProgress] = useState(0);
@@ -39,6 +40,7 @@ function App() {
   return (
     <>
       {/* so that all states in product state can be accsessed by all the components wrapped inside it */}
+      <Modestate>
       <Clickstate>
       <Loadingstate>
       <Similarproductstate>
@@ -65,7 +67,7 @@ function App() {
                       element={
                         <>
                           <div className="search-bar-container">
-                            <Display_User_Name />
+                            <Display_User_Name  alert={alert} showAlert={showAlert}/>
                             <SearchBar
                               progress={progress}
                               setProgress={setProgress}
@@ -125,6 +127,7 @@ function App() {
       </Similarproductstate>
       </Loadingstate>
       </Clickstate>
+      </Modestate>
     </>
   );
 }

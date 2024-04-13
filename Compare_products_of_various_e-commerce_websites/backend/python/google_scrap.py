@@ -298,6 +298,8 @@ if __name__ == "__main__":
     else:
         product_details["same_product"] = pd_same_prod
     product_details["similar_products"] = sp.similar_top_result_flipkart(product)
+    # product_details["same_product"] = get_product_details_all_website(product)
+    # product_details["similar_product"] = sp.similar_top_result_flipkart(product)
 
     product_details = [product_details]
     print((product_details),end="")

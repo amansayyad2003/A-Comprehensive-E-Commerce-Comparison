@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Modecontext from '../../context/mode/Modecontext';
 function Navbar() {
+
+  
+
+
+  const {mode,toggleMode}= useContext(Modecontext)
+
+  
+  
+
 
   const navigate = useNavigate();
 
@@ -20,7 +30,7 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+      <nav className={`navbar fixed-top navbar-expand-lg navbar-${mode} bg-${mode}`}>
   <div className="container-fluid">
     <Link className="navbar-brand" to="/">Compare Craft</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +45,20 @@ function Navbar() {
       
     </div>
 
-    {!localStorage.getItem('authtoken')?      <form className="d-flex">
+
+
+    <div class={`form-check form-switch mx-2 text-${mode == 'dark'?"light":"dark"}`} style={{ marginTop: '10px' }} >
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleMode}/>
+  <label class="form-check-label mx-2" htmlFor="flexSwitchCheckDefault"><h5>Enable Dark Mode</h5></label>
+</div>
+
+    {!localStorage.getItem('authtoken')?      <htmlForm className="d-flex">
       <Link to="/login" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Login</Link>
-      <Link to="/signup" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Sign Up</Link></form>
+      <Link to="/signup" className="btn btn-primary mx-2" tabIndex="-1" role="button" aria-disabled="true">Sign Up</Link></htmlForm>
   :<button type="button" className="btn btn-primary mx-2" onClick={handleLogout}>Logout</button>}
 
-    <Link to="/displaycart"><i className="fa-solid fa-cart-shopping mx-2"></i></Link>
-    <h5 style={{ marginTop: '10px' }} >Cart</h5>
+    <Link to="/displaycart"><i className="fa-solid fa-cart-shopping mx-2 "></i></Link>
+    <h5 style={{ marginTop: '10px' }} className={`text-${mode == 'dark'?"light":"dark"}`} >Cart</h5>
     {/* <Link className="btn btn-primary mx-2" to="/TODO" role="button">View Cart</Link> */}
   </div>
 </nav>
