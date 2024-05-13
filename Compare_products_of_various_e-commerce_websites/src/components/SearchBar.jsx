@@ -21,7 +21,7 @@ export default function SearchBar(props) {
   const { Input, setInput } = useContext(Inputcontext);
   const [history, setHistory] = useState([]);
   const [dropdown_suggestions, set_Dropdown_Suggestions] = useState([]);
-
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
 
   const add_to_history = async(value) => {
 
@@ -183,7 +183,7 @@ export default function SearchBar(props) {
     setClick(true);
     setLoading(true);
     fetchData(value);
-    add_to_history(value);
+    if (!(history.includes(value)))add_to_history(value);
     fetch_history();
   };
 
@@ -194,12 +194,28 @@ export default function SearchBar(props) {
   };
 
   const handleKeyDown = (event) => {
+    {console.log("Roman")}
+    {console.log(event.key)}
     if (event.key === "Enter") {
+      if (selectedSuggestionIndex !== -1) {
+        // If a suggestion is selected, handle Enter key press
+        const selectedSuggestion = dropdown_suggestions[selectedSuggestionIndex];
+        handleSuggestionClick(selectedSuggestion);
+      }
       setClick(true);
       setLoading(true);
       fetchData(Input);
-      add_to_history(Input);
+     if (!(history.includes(Input))) add_to_history(Input);
       fetch_history();
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setSelectedSuggestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (event.key === "ArrowDown") {
+      {console.log("Hey!")}
+      event.preventDefault();
+      setSelectedSuggestionIndex((prevIndex) =>
+        Math.min(prevIndex + 1, dropdown_suggestions.length - 1)
+      );
     }
   };
 
@@ -224,10 +240,11 @@ export default function SearchBar(props) {
             {link}
           </a>
         ))} */}
-
-        
+      {console.log("RVD")}
+        {console.log(selectedSuggestionIndex)}
       {dropdown_suggestions.map((link, index) => (
-          <a key={index} onClick={() => handleSuggestionClick(link)} href={`#${link.toLowerCase()}`}>
+        
+          <a key={index} className={index === selectedSuggestionIndex ? "selected" : ""} onClick={() => handleSuggestionClick(link)} href={`#${link.toLowerCase()}`}>
             {link}
           </a>
         ))}

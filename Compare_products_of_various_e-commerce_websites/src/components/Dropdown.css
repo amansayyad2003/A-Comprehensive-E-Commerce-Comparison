@@ -24,6 +24,11 @@
   border-bottom: 1px solid #ddd;
 }
 
+.selected {
+  background-color: #f0f0f0; /* Background color when selected */
+  font-weight: bold; /* Text weight when selected */
+  /* Add any other styles to indicate selection */
+}
 
 /* The search field when it gets focus/clicked on */
 #myInput:focus {outline: 3px solid #ddd;}
