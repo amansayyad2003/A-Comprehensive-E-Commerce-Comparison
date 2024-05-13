@@ -122,7 +122,7 @@ function App() {
                     <Route
                       exact
                       path="/audio-page"
-                      element={ <Audo_Listen_Page/> }
+                      element={ <Audo_Listen_Page setProgress={setProgress}/> }
                     ></Route>
                   </Routes>
                 </Router>

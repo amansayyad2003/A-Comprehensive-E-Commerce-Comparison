@@ -1,11 +1,17 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect,useContext} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import Inputcontext from "../../context/searchBar/Inputcontext";
-export default function Audo_Listen_Page() {
+import productContext from "../../context/products/Productcontext";
+import loadingcontext from "../../context/Spinner/Loadingcontext";
+export default function Audo_Listen_Page(props) {
     const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
     const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
     const [timeoutId, setTimeoutId] = useState(null);
-
+    const context = useContext(productContext);
+    const { products, setProducts } = context;
+    const loading_context = useContext(loadingcontext);
+    const { loading, setLoading } = loading_context;
+    const [display_icon,setDisplay_icon] = useState(true)
     const fetchData = async (value) => {
         try {
           props.setProgress(20);
@@ -60,6 +66,7 @@ export default function Audo_Listen_Page() {
                 SpeechRecognition.stopListening();
                 fetchData(transcript)
                 resetTranscript();
+                setDisplay_icon(false);
             }, 2000); // Set a new timeout to stop listening after 2 seconds of no voice input
             setTimeoutId(newTimeoutId);
         }
@@ -72,7 +79,9 @@ export default function Audo_Listen_Page() {
             <div style={{ width: '80%',fontSize: '45px',paddingTop: '94px'  }}  onClick={() => setTextToCopy(transcript)}>
                 {transcript}
             </div>
-            <i style={{ width: '50%', textAlign: 'right', fontSize: '240px' }} className="fa-solid fa-microphone" onClick={startListening}></i>
+            {display_icon && // Display the icon only if display_icon is true
+                    <i style={{ width: '50%', textAlign: 'right', fontSize: '240px' }} className="fa-solid fa-microphone" onClick={startListening}></i>
+                }
         </div>
 
       
