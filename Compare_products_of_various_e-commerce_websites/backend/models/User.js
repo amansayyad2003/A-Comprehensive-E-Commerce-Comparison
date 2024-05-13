@@ -18,6 +18,18 @@ const userSchema = new Schema({
     type:Date,
     default:Date.now()
   },
+
+  history: [{
+    query: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  }]
+  
 });
 
 module.exports = mongoose.model("user",userSchema) // create a model user using userSchema

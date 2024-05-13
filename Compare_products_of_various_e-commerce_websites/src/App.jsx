@@ -21,6 +21,7 @@ import Similarproductstate from "../context/SimilarProductContext/Similarproduct
 import Loadingstate from "../context/Spinner/Loadingstate";
 import Clickstate from "../context/click/Clickstate";
 import Modestate from "../context/mode/Modestate";
+import Audo_Listen_Page from "./components/Audo_Listen_Page";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [progress, setProgress] = useState(0);
@@ -117,6 +118,11 @@ function App() {
                       element={
                         <Product_Comparison_Page cart_action={"Add to Cart"} />
                       }
+                    ></Route>
+                    <Route
+                      exact
+                      path="/audio-page"
+                      element={ <Audo_Listen_Page/> }
                     ></Route>
                   </Routes>
                 </Router>

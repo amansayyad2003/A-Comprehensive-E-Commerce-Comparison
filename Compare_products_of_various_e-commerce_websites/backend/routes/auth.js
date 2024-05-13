@@ -173,4 +173,52 @@ router.get('/getuser',fetchUserID,async(req,res)=>{
 })
 
 
+// STORE USER'S HISTORY USING POST /api/auth/store-history
+
+
+router.post('/store-history',fetchUserID,async(req,res)=>{
+
+  {console.log("Inside router.post store history")}
+
+  let success = false;
+
+  try{
+
+    const userID = req.user.id // obtained using middlware fetchUserID
+
+    const user = await User_model.findById(userID);
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    // Add a new history entry
+    const newHistoryEntry = {
+      query: req.body.query, // Assuming the search query is sent in the request body
+      createdAt: new Date()
+    };
+
+    console.log("About to print newHistoryEntry")
+
+    console.log(newHistoryEntry)
+
+    user.history.push(newHistoryEntry);
+
+    // Save the updated user document
+    await user.save();
+
+
+  success = true;
+
+  res.json({success,user})
+
+
+
+  }catch(error){
+
+      return res.status(400).json({ success,error: error.message});
+  }
+
+})
+
 module.exports = router
