@@ -4,7 +4,7 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-BASE_URL = "https://www.flipkart.com"
+base_url = "https://www.flipkart.com"
 
 def scrap_products_flipkart(url):
     # print(url)
@@ -16,24 +16,38 @@ def scrap_products_flipkart(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, "html.parser")
         # print(soup)
-        products = soup.find_all("div", {'class': ["_1xHGtK", "_373qXS", "_4ddWXP", "_2kHMtA"]})
+        # products = soup.find_all("div", {'class': ["_1xHGtK", "_373qXS", "_4ddWXP", "_2kHMtA"]})
+        products = soup.find_all("div", {'class':["cPHDOP", "col-12-12"]})
         # print(products)
         for product in products:
             # print(product)
             try:
-                try:
-                    title = product.find('div', class_="_4rR01T").text
-                except:
-                    title = product.find('a', {'class': ["IRpwTa", "s1Q9rs"]}).get('title')
-                # print(title)
-                price = product.find('div', {'class' : ["_30jeq3", "_1_WHN1"]}).text
-                img_url = product.find('img', {'class' : ["_396cs4", "_2r_T1I"]}).get('src')
-                website_url = BASE_URL + product.find('a', {'class' : ["_2rpwqI", "_1fQZEK", "IRpwTa", "s1Q9rs"]}).get('href')
+                    # title = product.find('div', class_="_4rR01T").text
+            # try:
+                title = product.find('div', class_="KzDlHZ").text
+            # except:
+                # title = None
+            # print(title)
+            # price = product.find('div', {'class' : ["_30jeq3", "_1_WHN1"]}).text
+            # try:
+                price = product.find('div', {'class': ["Nx9bqj", "_4b5DiR"]}).text.replace("₹","").replace(",","")
+            # except:
+                # price = None
+            # img_url = product.find('img', {'class' : ["_396cs4", "_2r_T1I"]}).get('src')
+            # try:
+                img_url = product.find('img', class_="DByuf4").get('src')
+            # except:
+                # img_url = None
+            # website_url = BASE_URL + product.find('a', {'class' : ["_2rpwqI", "_1fQZEK", "IRpwTa", "s1Q9rs"]}).get('href')
+            # try:
+                website_url = base_url + product.find('a', {'class': ['CGtC98']}).get('href')
+            # except:
+                # website_url = None
+                product_details  = {"title":title, "price": price, "imgage_url": img_url, 'website_url': website_url}
+                # print(product_details)
+                products_details.append(product_details)
             except:
                 continue
-            product_details  = {"title":title, "price": price, "imgage_url": img_url, 'website_url': website_url}
-            # print(product_details)
-            products_details.append(product_details)
         return products_details
     return None
 
@@ -47,7 +61,9 @@ def similar_top_result_flipkart(product):
     url = f"https://www.flipkart.com/search?q={keyword}"
     # url = base_url_croma + title.replace(",", "%2").replace(" ", "-") #+ "%3Arelevance&text=" + title.replace(",", "%2").replace(" ", "%20") # count = 0
 
+    # print(url)
     list_products = scrap_products_flipkart(url)
+    # return 0
     # print(list_products)
     corpus = []
     list_index = {}
@@ -99,6 +115,7 @@ product = {'title': 'FUJIFILM Instax Treasure Box Mini 11 Instant Camera', 'pric
 
 # print(product['title'])
 # var  = similar_top_result_flipkart(product)
+# print(var)
 # for i in var:
 #     print(i)
     
