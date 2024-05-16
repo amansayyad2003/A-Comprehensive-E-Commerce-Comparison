@@ -32,7 +32,7 @@ export default function Display_User_Name(props) {
 
 
   return (
-    <div className='display-username-container' style={{ textAlign: 'center', marginTop: '-163px',color:mode==='dark'?'white':'black'}}>
+    <div className='display-username-container' style={{ textAlign: 'center', marginTop: '10px',color:mode==='dark'?'white':'black'}}>
     <div>
       {/* style={{ marginRight: '10px' }} */}
       <h1 > 

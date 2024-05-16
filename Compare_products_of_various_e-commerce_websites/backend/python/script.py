@@ -37,17 +37,18 @@ def transform(soup):
     products_details = []
     try:
         # print(f"Inside tranform Type of soup = {type(soup)}")
-        products = soup.find_all("div", class_="_2kHMtA")
+        products = soup.find_all("div", {'class':["cPHDOP", "col-12-12"]})
         for product in products:
             try:
-                title = product.find('div', class_="_4rR01T").text
-                img_url = product.find('img', class_="_396cs4").get('src')
-                price = product.find('div', {'class': ["_30jeq3", "_1_WHN1"]}).text.replace("₹","").replace(",","")
-                website_url = base_url + product.find('a', {'class': ['_2rpwqI', '_1fQZEK']}).get('href')
+                title = product.find('div', class_="KzDlHZ").text
+                img_url = product.find('img', class_="DByuf4").get('src')
+                price = product.find('div', {'class': ["Nx9bqj", "_4b5DiR"]}).text.replace("₹","").replace(",","")
+                website_url = base_url + product.find('a', {'class': ['CGtC98']}).get('href')
                 product_details = {"title": title, "price": price, "image_url": img_url, 'website_url': website_url}
                 products_details.append(product_details)
             except Exception as e:
-                print(f"Error extracting product details: {e}", file=sys.stderr)
+                continue
+                # print(f"Error extracting product details: {e}", file=sys.stderr)
     except Exception as e:
         print(f"Error transforming data: {e}", file=sys.stderr)
     return products_details
