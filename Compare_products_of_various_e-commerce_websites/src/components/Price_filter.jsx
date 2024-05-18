@@ -30,7 +30,7 @@ export default function Price_filter(props) {
     }, [products, MinPrice, MaxPrice]);
 
     return (
-        <div className="container py-5 " style={{ maxWidth: '1200px', color: mode === 'dark' ? '#198754' : 'black' }}>
+        <div className="container py-5 " style={{ maxWidth: '569px', color: mode === 'dark' ? '#198754' : 'black' }}>
             {loading ? (
                 <Spinner />
             ) : (

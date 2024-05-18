@@ -25,7 +25,7 @@ function Product_Comparison_Page() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
       <div style={{ textAlign: "center",color:mode==='dark'?'white':'black'} }>
-        <h2 style={{ marginBottom: "40px", marginTop:"70px" }}>{Title}</h2>
+        <h2 style={{ marginBottom: "40px" }}>{Title}</h2>
         <img
           src={Image_url}
           alt="Couldn't find the image...."
@@ -75,7 +75,7 @@ function Product_Comparison_Page() {
         className="row"
         style={{ marginLeft: "40px", marginTop: "20px", width: "1500px" }}
       >
-        <h1 style={{ margin: "70px" }}>
+        <h1 style={{  marginTop: "70px", marginLeft: "30px"  }}>
           {" "}
           Similar Products
         </h1>
@@ -88,6 +88,7 @@ function Product_Comparison_Page() {
                 <div
                   className="product-container"
                   style={{
+                    marginTop: "20px",
                     margin: "40px",
                     display: "flex",
                     width: "1100px",
