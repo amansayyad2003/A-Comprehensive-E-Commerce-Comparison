@@ -15,10 +15,6 @@ export default function Sort_products() {
 
     setSorting_val(sort_value)
 
-    // console.log("About to print sort val")
-
-    // console.log(sorting_val)
-
     let temp_data = [...products];
 
     console.log("Printing products before if statement")

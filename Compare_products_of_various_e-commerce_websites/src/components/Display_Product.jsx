@@ -1,32 +1,23 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import Display_Cart from "./Display_Cart";
 import CartContext from "../../context/cart/Cartcontext";
 import Modecontext from '../../context/mode/Modecontext';
-import Product_Comparison_Page from "./Product_Comparison_Page";
-
-import Imagecontext from "../../context/product_image/Imagecontext";
-import productContext from "../../context/products/Productcontext";
+import Imagecontext from "../../context/product_image/Image_and_Title_context";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
 import loadingcontext from '../../context/Spinner/Loadingcontext';
 export default function Display_product(props) {
-  {console.log("INSIDE Display_product!!!")}
-  {console.log("About to print product inside!!! Display_Product.jsx")}
-  {console.log(props.product)}
 
-  const {mode,toggleMode}= useContext(Modecontext)
+  const {mode}= useContext(Modecontext)
   
   const loading_context = useContext(loadingcontext)
-  const {loading,setLoading} = loading_context
-
-  const [image, setImage] = useState("");
+  const {setLoading} = loading_context
   const context = useContext(CartContext);
-  const { fetch_cart, addToCart, deleteFromCart } = context;
+  const {addToCart, deleteFromCart } = context;
   const { showAlert } = props;
   const image_url_context = useContext(Imagecontext);
-  const { Image_url, setImage_url, Title, setTitle } = image_url_context;
+  const {setImage_url, setTitle } = image_url_context;
   const simiProdcontext = useContext(similarproductContext);
-  const { similar_products, setSimilarProducts } = simiProdcontext;
+  const {setSimilarProducts } = simiProdcontext;
 
   const addtoCart = () => {
     addToCart(props.product);
@@ -42,13 +33,11 @@ export default function Display_product(props) {
     try {
       setLoading(true)
       console.log("Inside Fetch Data similar product");
-      // props.setProgress(20)
 
       const url = `http://localhost:3000/api/simproduct?searchTerm=${encodeURIComponent(
         product
       )}`;
 
-      // props.setProgress(50)
 
       console.log("Product: " + product);
       const response = await fetch(url, {
@@ -56,49 +45,34 @@ export default function Display_product(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        // body: product,
-        // Convert search term to JSON and send it as the query parameter
       });
 
-      // console.log("After Fetching")
-      // console.log("Response SIMILAR PRODUCT: " + response)
 
       if (!response.ok) {
         throw new Error("Failed to execute Python script");
       }
 
       const result = await response.json();
-      // props.setProgress(70)
+
       console.log("Result from backend:", result["result"]);
 
-      const dead = result["result"];
-      //     console.log("Printing type of dead:", typeof dead);
-      //   console.log("Original JSON string:", dead);
-
-      // console.log(result);
-      const cleanedStr = dead
+      const required_result = result["result"];
+  
+      const cleanedStr = required_result
         .replace(/'/g, '"')
         .replace(/,\s+/g, ",")
         .replace("None", "null");
-      // cleanedStr = result;
-      //     console.log("Cleaned JSON string:", cleanedStr);
+
 
       console.log(cleanedStr);
       const dictionary = JSON.parse(cleanedStr);
-      const list = JSON.parse(cleanedStr);
 
       console.log("Parsed JSON data:", dictionary);
-
-      //   console.log("Printing type of list:", typeof list);
 
       setSimilarProducts(dictionary);
 
       setLoading(false)
 
-
-     
-
-      //   props.setProgress(100)
     } catch (error) {
       console.error("Error:", error);
     }

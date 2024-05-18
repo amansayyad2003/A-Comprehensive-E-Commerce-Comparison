@@ -1,28 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Sort_products from './Sort_products'
-import Product from './Product'
-import productContext from '../../context/products/Productcontext'
-import Display_Cart from './Display_Cart'
+import React from 'react'
 import Price_filter from './Price_filter'
 export default function Home(props) {
-
-   
-  
 
 
   return (
     <div className='container'>
 
-
-    {/* <Sort_products/>     */}
-
     <Price_filter alert={props.alert} showAlert={props.showAlert}/>
 
-    <Product alert={props.alert} showAlert={props.showAlert}/>
-
-
-       
-      
     </div>
   )
 }

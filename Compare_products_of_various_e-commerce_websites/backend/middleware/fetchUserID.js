@@ -9,20 +9,16 @@ const fetchUserID = (req,res,next)=>{
 
     try{
 
-        console.log("I  here1\n")
-        // const authtoken = req.header("authtoken")
-        const authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY0MTlkOGIyNDc0ZWVjZWY1YjAzODlkIn0sImlhdCI6MTcxNTU3NjIwM30.FxUOPwjokVS24G7_nzw6-vuinK0tDcmAq647DMPwB5k"
+
+        const authtoken = req.header("authtoken")
         console.log("Printing auth token")
         console.log(authtoken)
-        console.log("I  here2\n")
+
     if (!authtoken){
         return res.status(400).json({ success,error:"Please enter a valid token" });
     }
-    console.log("I  here3\n")
 
-    //  const data = jwt.verify(token, JWT_SECRET);
 
-    // const data = jwt.verify(JWT_SECRET,authtoken)
     const data = jwt.verify(authtoken,JWT_SECRET)
 
     console.log("I  here4\n")

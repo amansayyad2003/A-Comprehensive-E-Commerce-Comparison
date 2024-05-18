@@ -1,6 +1,4 @@
-import { useContext, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import {useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -13,9 +11,8 @@ import Display_Cart from "./components/Display_Cart";
 import Cartstate from "../context/cart/Cartstate";
 import LoadingBar from "react-top-loading-bar";
 import Product_Comparison_Page from "./components/Product_Comparison_Page";
-// import { temp_search_bar } from './components/temp_search_bar'
 import Inputstate from "../context/searchBar/Inputstate";
-import Imagestate from "../context/product_image/Imagestate";
+import Image_and_Titlestate from "../context/product_image/Image_and_Title_state";
 import Display_User_Name from "./components/Display_User_Name";
 import Similarproductstate from "../context/SimilarProductContext/Similarproductstate";
 import Loadingstate from "../context/Spinner/Loadingstate";
@@ -45,7 +42,7 @@ function App() {
       <Clickstate>
       <Loadingstate>
       <Similarproductstate>
-        <Imagestate>
+        <Image_and_Titlestate>
           <Inputstate>
             <Productstate>
               <Cartstate>
@@ -53,13 +50,7 @@ function App() {
                   <Navbar />
 
                   <LoadingBar color="#f11946" progress={progress} />
-                  <div className="search-bar-container">
-                    {/* <SearchBar progress={progress} setProgress={setProgress}/> */}
-                  </div>
-                  {/* <temp_search_bar/> */}
-
-                  {/* <temp/> */}
-
+      
                   <Alert alert={alert} />
                   <Routes>
                     <Route
@@ -79,7 +70,6 @@ function App() {
                       }
                     ></Route>
 
-                    {/* <Route exact path="/" element={<Home alert={alert} showAlert={showAlert}/>}></Route> */}
 
                     <Route
                       exact
@@ -129,7 +119,7 @@ function App() {
               </Cartstate>
             </Productstate>
           </Inputstate>
-        </Imagestate>
+        </Image_and_Titlestate>
       </Similarproductstate>
       </Loadingstate>
       </Clickstate>

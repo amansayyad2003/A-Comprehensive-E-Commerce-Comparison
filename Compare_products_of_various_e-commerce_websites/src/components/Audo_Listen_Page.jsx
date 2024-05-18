@@ -1,16 +1,15 @@
 import React, { useState, useEffect,useContext} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import Inputcontext from "../../context/searchBar/Inputcontext";
 import productContext from "../../context/products/Productcontext";
 import loadingcontext from "../../context/Spinner/Loadingcontext";
 export default function Audo_Listen_Page(props) {
     const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
-    const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+    const {transcript, resetTranscript} = useSpeechRecognition();
     const [timeoutId, setTimeoutId] = useState(null);
     const context = useContext(productContext);
-    const { products, setProducts } = context;
+    const {setProducts } = context;
     const loading_context = useContext(loadingcontext);
-    const { loading, setLoading } = loading_context;
+    const {setLoading } = loading_context;
     const [display_icon,setDisplay_icon] = useState(true)
     const fetchData = async (value) => {
         try {
@@ -36,11 +35,11 @@ export default function Audo_Listen_Page(props) {
           props.setProgress(100);
           console.log("Result from backend:", result["result"]);
     
-          const dead = result["result"];
-          console.log("Printing type of dead:", typeof dead);
-          console.log("Original JSON string:", dead);
+          const required_result = result["result"];
+          console.log("Printing type of required_result:", typeof required_result);
+          console.log("Original JSON string:", required_result);
     
-          const cleanedStr = dead.replace(/'/g, '"').replace(/,\s+/g, ",");
+          const cleanedStr = required_result.replace(/'/g, '"').replace(/,\s+/g, ",");
           console.log("Cleaned JSON string:", cleanedStr);
     
           const list = JSON.parse(cleanedStr);
@@ -74,7 +73,6 @@ export default function Audo_Listen_Page(props) {
 
   return (
     <div>
-        {/* <h1>Listening...</h1> */}
         <div style={{ width: '100%', display: 'flex'}}>
             <div style={{ width: '80%',fontSize: '45px',paddingTop: '94px'  }}  onClick={() => setTextToCopy(transcript)}>
                 {transcript}

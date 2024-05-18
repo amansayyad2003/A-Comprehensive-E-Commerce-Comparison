@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import productContext from '../../context/products/Productcontext';
-import Inputcontext from '../../context/searchBar/Inputcontext';
 import Display_product from './Display_Product';
 import loadingcontext from '../../context/Spinner/Loadingcontext';
 import Spinner from './Spinner';
@@ -9,13 +8,12 @@ import Modecontext from '../../context/mode/Modecontext';
 
 export default function Price_filter(props) {
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const { mode, toggleMode } = useContext(Modecontext);
+    const { mode} = useContext(Modecontext);
     const loading_context = useContext(loadingcontext);
-    const { loading, setLoading } = loading_context;
+    const { loading} = loading_context;
     const click_context = useContext(Clickcontext);
-    const { Click, setClick } = click_context;
+    const { Click} = click_context;
     let product_context = useContext(productContext);
-    const { Input, setInput } = useContext(Inputcontext);
     const { products } = product_context;
 
     const [MinPrice, SetMinPrice] = useState(0);

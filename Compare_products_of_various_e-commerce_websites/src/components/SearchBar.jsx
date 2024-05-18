@@ -1,11 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./searchBar.css";
-import { json } from "react-router-dom";
 import productContext from "../../context/products/Productcontext";
-import LoadingBar from "react-top-loading-bar";
 import Inputcontext from "../../context/searchBar/Inputcontext";
-import Spinner from "./Spinner";
 import loadingcontext from "../../context/Spinner/Loadingcontext";
 import Clickcontext from "../../context/click/Clickcontext";
 import { useNavigate } from "react-router-dom";
@@ -14,10 +11,10 @@ export default function SearchBar(props) {
   const navigateTo = useNavigate();
   const loading_context = useContext(loadingcontext);
   const click_context = useContext(Clickcontext);
-  const { Click, setClick } = click_context;
-  const { loading, setLoading } = loading_context;
+  const {setClick } = click_context;
+  const { setLoading } = loading_context;
   const context = useContext(productContext);
-  const { products, setProducts } = context;
+  const {setProducts } = context;
   const { Input, setInput } = useContext(Inputcontext);
   const [history, setHistory] = useState([]);
   const [dropdown_suggestions, set_Dropdown_Suggestions] = useState([]);
@@ -108,8 +105,6 @@ export default function SearchBar(props) {
   };
 
   const fetchSuggestions = (value) => {
-    console.log("Hell No")
-    console.log(history)
     
     // If value is null or empty, set filteredSuggestions to history
 
@@ -117,8 +112,7 @@ export default function SearchBar(props) {
     const filteredSuggestions = history.filter((search) =>
       search.toLowerCase().startsWith(value.toLowerCase())
     ).slice(0,5);
-    console.log("Hell")
-    console.log(filteredSuggestions)
+ 
     set_Dropdown_Suggestions(filteredSuggestions);
   };
   
@@ -158,11 +152,11 @@ export default function SearchBar(props) {
       props.setProgress(100);
       console.log("Result from backend:", result["result"]);
 
-      const dead = result["result"];
-      console.log("Printing type of dead:", typeof dead);
-      console.log("Original JSON string:", dead);
+      const required_result = result["result"];
+      console.log("Printing type of required_result:", typeof required_result);
+      console.log("Original JSON string:", required_result);
 
-      const cleanedStr = dead.replace(/'/g, '"').replace(/,\s+/g, ",");
+      const cleanedStr = required_result.replace(/'/g, '"').replace(/,\s+/g, ",");
       console.log("Cleaned JSON string:", cleanedStr);
 
       const list = JSON.parse(cleanedStr);
@@ -188,14 +182,12 @@ export default function SearchBar(props) {
   };
 
   const handleChange = (value) => {
-    {console.log("Inside handleChange")}
     setInput(value);
     fetchSuggestions(value);
   };
 
   const handleKeyDown = (event) => {
-    {console.log("Roman")}
-    {console.log(event.key)}
+
     if (event.key === "Enter") {
       if (selectedSuggestionIndex !== -1) {
         // If a suggestion is selected, handle Enter key press
@@ -231,17 +223,8 @@ export default function SearchBar(props) {
     <>
       <div className="input-wrapper">
       <div className="dropdown">
-
-      {/* <div id="myDropdown" className={`dropdown-content ${showDropdown ? 'show' : ''}`}> */}
       <div id="myDropdown" className={`dropdown-content`}>
       
-      {/* {filteredLinks.map((link, index) => (
-          <a key={index} href={`#${link.toLowerCase()}`}>
-            {link}
-          </a>
-        ))} */}
-      {console.log("RVD")}
-        {console.log(selectedSuggestionIndex)}
       {dropdown_suggestions.map((link, index) => (
         
           <a key={index} className={index === selectedSuggestionIndex ? "selected" : ""} onClick={() => handleSuggestionClick(link)} href={`#${link.toLowerCase()}`}>
@@ -263,20 +246,6 @@ export default function SearchBar(props) {
         />
         <FaSearch id="search-icon" onClick={(e) => handleClick(Input)} />
 
-        {/* <div className="dropdown">
-          {dropdown_suggestions.length > 0 && (
-            <ul className="dropdown_suggestions">
-              {dropdown_suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleSuggestionClick(suggestion)}
-                >
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div> */}
       </div>
     </>
   );

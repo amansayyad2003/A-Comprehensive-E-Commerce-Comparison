@@ -1,8 +1,5 @@
 const Product = require("../models/Product")
 
-/*
-product_details = {"title": title, "price": price, "image_url_url": img_url, 'website_url': website_url}
-*/
 
 const getAllProducts = async(req,res)=>{
 
@@ -74,8 +71,6 @@ const getAllProducts = async(req,res)=>{
 
     const mydata = await apiData
 
-
-    // console.log(mydata)
 
     res.status(200).json({mydata,totalResults})
 

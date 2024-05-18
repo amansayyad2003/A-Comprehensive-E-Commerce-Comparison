@@ -1,28 +1,22 @@
 import React, { useContext } from "react";
-import "./styles.css"; // Assuming your CSS file is in the same directory
+import "./styles.css";
 import { Link } from "react-router-dom";
-import Imagecontext from "../../context/product_image/Imagecontext";
-import Display_product from "./Display_Product";
-import productContext from "../../context/products/Productcontext";
-import Product from "./Product";
+import Image_and_Titlecontext from "../../context/product_image/Image_and_Title_context";
 import similarproductContext from "../../context/SimilarProductContext/Similarproductcontext";
 import loadingcontext from "../../context/Spinner/Loadingcontext";
 import Modecontext from '../../context/mode/Modecontext';
 import Spinner from "./Spinner";
 
-function Product_Comparison_Page(props) {
+function Product_Comparison_Page() {
   
   const loading_context = useContext(loadingcontext);
   const { loading } = loading_context;
-  const context1 = useContext(similarproductContext);
-  const { similar_products } = context1;
+  const simproductContext = useContext(similarproductContext);
+  const { similar_products } = simproductContext;
 
-  const image_url_context = useContext(Imagecontext);
+  const image_url_context = useContext(Image_and_Titlecontext);
   const { Image_url, Title } = image_url_context;
-  const {mode,toggleMode}= useContext(Modecontext)
-
-  {console.log("About to print product inside Product Comparison Page")}
-  {console.log(similar_products)} 
+  const {mode}= useContext(Modecontext)
 
   return (
     <>
@@ -91,16 +85,6 @@ function Product_Comparison_Page(props) {
           similar_products[0].similar_product.map((product) => {
             return (
               <div className="my-2">
-                {console.log(
-                  "About to print product before passing to Display Product"
-                )}
-                {console.log(product)}
-                {/* <Display_product
-                  product={product}
-                  // alert={props.alert}
-                  // showAlert={props.showAlert}
-                  cart_action={"Add to Cart"}
-                /> */}
                 <div
                   className="product-container"
                   style={{
@@ -118,38 +102,15 @@ function Product_Comparison_Page(props) {
                   >
                     <h5 className="card-title">{product.title}</h5>
                     <p style={{ fontSize: "1.2em" }}>₹{product.price}</p>
-                    {/* <p className="card-text">{props.product.description}</p> */}
                     <p>
                       <Link
                         to="/product-comparison"
                         className="btn btn-primary"
-                        onClick={() => {
-                          setImage_url(product.website_url);
-                          setTitle(product.title);
-                          // fetchData(JSON.stringify(product));
-                        }}
                       >
                         Visit Website
                       </Link>
                     </p>
                     <div>
-                      {/* <div className="btn btn-primary" onClick={props.cart_action === "Add to Cart" ? () => { addtoCart() } : () => { deletefromCart(props.product._id) }}>{props.cart_action}</div> */}
-                      {/* <div
-                        className="btn btn-primary"
-                        onClick={
-                          props.cart_action === "Add to Cart"
-                            ? () => {
-                                addtoCart();
-                                setImage_url(props.product.image_url);
-                                setTitle(props.product.title);
-                              }
-                            : () => {
-                                deletefromCart(props.product._id);
-                              }
-                        }
-                      >
-                        
-                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -161,10 +122,6 @@ function Product_Comparison_Page(props) {
         </>
         )}
       </div>
-
-      
-
-      {/* <Display_product product={product} alert={props.alert} showAlert={props.showAlert} cart_action={"Add to Cart"}/> */}
     </>
   );
 }

@@ -1,18 +1,13 @@
-import React, { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext} from 'react'
 import { Link
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Modecontext from '../../context/mode/Modecontext';
 function Navbar() {
 
-  
-
 
   const {mode,toggleMode}= useContext(Modecontext)
 
-  
-  
 
 
   const navigate = useNavigate();
@@ -22,11 +17,8 @@ function Navbar() {
     localStorage.removeItem('authtoken')
 
     navigate("/login");
-
     
   }
-
-
 
   return (
     <div>
@@ -59,7 +51,6 @@ function Navbar() {
 
     <Link to="/displaycart"><i className="fa-solid fa-cart-shopping mx-2 "></i></Link>
     <h5 style={{ marginTop: '10px' }} className={`text-${mode == 'dark'?"light":"dark"}`} >Cart</h5>
-    {/* <Link className="btn btn-primary mx-2" to="/TODO" role="button">View Cart</Link> */}
   </div>
 </nav>
     </div>
