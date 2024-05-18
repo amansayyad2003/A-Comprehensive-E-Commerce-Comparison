@@ -1,5 +1,7 @@
 const express = require('express')
-const JWT_SECRET = "This is a secret"
+// const JWT_SECRET = "This is a secret"
+require('dotenv').config();
+const JWT_SECRET = process.env.SECRET
 let jwt = require('jsonwebtoken');
 const fetchUserID = (req,res,next)=>{
 
